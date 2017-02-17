@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diamond.Storage
+namespace Diamond.Storage.Views
 {
-    public enum ResourceType
+    public class ViewCurrency : IViewField
     {
-        Text,
-        Table,
-        Script,
-        View
+        public ViewCurrency()
+        {
+
+        }
     }
 }

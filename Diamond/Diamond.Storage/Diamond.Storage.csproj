@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellDataType.cs" />
     <Compile Include="Formula.cs" />
@@ -66,7 +67,15 @@
     <Compile Include="ResourceIdentifier.cs" />
     <Compile Include="ResourceType.cs" />
     <Compile Include="Table.cs" />
-    <Compile Include="View.cs" />
+    <Compile Include="TableMethodSource.cs" />
+    <Compile Include="Views\IViewField.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\ViewCurrency.cs" />
+    <Compile Include="Views\ViewEntry.cs" />
+    <Compile Include="Views\ViewMethodSource.cs" />
+    <Compile Include="Views\ViewNumber.cs" />
+    <Compile Include="Views\ViewOptions.cs" />
+    <Compile Include="Views\ViewText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

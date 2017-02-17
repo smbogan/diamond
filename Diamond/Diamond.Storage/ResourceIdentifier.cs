@@ -15,7 +15,8 @@ namespace Diamond.Storage
         {
             { ResourceType.Table, "table" },
             { ResourceType.Text, "txt" },
-            { ResourceType.Script, "script" }
+            { ResourceType.Script, "script" },
+            { ResourceType.View, "view" }
         };
 
         public ResourceType ResourceType { get; private set; }

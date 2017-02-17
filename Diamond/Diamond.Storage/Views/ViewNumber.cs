@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diamond
+namespace Diamond.Storage.Views
 {
-    public class Class1
+    public class ViewNumber : IViewField
     {
+        public ViewNumber()
+        {
+
+        }
     }
 }

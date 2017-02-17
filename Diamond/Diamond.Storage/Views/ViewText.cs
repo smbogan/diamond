@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diamond.Storage
+namespace Diamond.Storage.Views
 {
-    public class View
+    public class ViewText : IViewField
     {
-        
+        public ViewText()
+        {
+
+        }
     }
 }

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diamond.Storage
+namespace Diamond.Storage.Views
 {
-    public enum ResourceType
+    public class IViewField
     {
-        Text,
-        Table,
-        Script,
-        View
+
     }
 }
