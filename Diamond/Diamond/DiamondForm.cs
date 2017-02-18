@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CefSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,27 @@ namespace Diamond
 {
     public partial class DiamondForm : Form
     {
+        CefSharp.WinForms.ChromiumWebBrowser Browser { get; set; }
+
         public DiamondForm()
         {
             InitializeComponent();
+        }
+
+        private void DiamondForm_Load(object sender, EventArgs e)
+        {
+            Browser = new CefSharp.WinForms.ChromiumWebBrowser("www://web/index.html")
+            {
+                BrowserSettings = new BrowserSettings()
+                {
+                    WebSecurity = CefState.Disabled,
+                    ApplicationCache = CefState.Disabled,
+                }
+            };
+
+            Controls.Add(Browser);
+
+            Browser.Dock = DockStyle.Fill;
         }
     }
 }

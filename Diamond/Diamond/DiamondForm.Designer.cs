@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(499, 346);
             this.Name = "DiamondForm";
             this.Text = "Diamond Mine";
+            this.Load += new System.EventHandler(this.DiamondForm_Load);
             this.ResumeLayout(false);
 
         }

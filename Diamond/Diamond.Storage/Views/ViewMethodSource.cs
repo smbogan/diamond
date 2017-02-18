@@ -13,6 +13,11 @@ namespace Diamond.Storage.Views
 
         }
 
+        public IViewField Link(string link)
+        {
+            return new ViewLink(link);
+        }
+
         public IViewField Options(params string[] options)
         {
             return new ViewOptions(options);
