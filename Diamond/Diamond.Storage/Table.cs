@@ -47,6 +47,11 @@ namespace Diamond.Storage
             {
                 return data[row][column];
             }
+
+            set
+            {
+                data[row][column] = value;
+            }
         }
 
         public void AddRow(int rowPosition)
