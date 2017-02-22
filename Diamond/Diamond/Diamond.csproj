@@ -81,17 +81,25 @@
     <Compile Include="DiamondForm.Designer.cs">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableFormulaMethodSource.cs" />
     <Compile Include="MimeTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHandler.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
-    <Compile Include="Templates\Tables\TableTemplate.cs">
+    <Compile Include="Templates\PageAttribute.cs" />
+    <Compile Include="Templates\Tables\CellTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CellTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Tables\CellTemplate.Data.cs" />
+    <Compile Include="Templates\Tables\TableTemplate.Data.cs" />
+    <Compile Include="Templates\Tables\TableTemplate1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TableTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Tables\TableTemplate.Data.cs" />
     <EmbeddedResource Include="DiamondForm.resx">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,15 +143,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="web\index.html" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Templates\Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\Tables\CellTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CellTemplate.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\Tables\TableTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>TableTemplate.cs</LastGenOutput>
+      <LastGenOutput>TableTemplate1.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.css" />
     <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.min.css" />

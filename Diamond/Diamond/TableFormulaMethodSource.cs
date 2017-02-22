@@ -5,20 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Diamond.Templates.Tables
+namespace Diamond
 {
-    [Page(ResourceType.Table)]
-    public partial class TableTemplate
+    public class TableFormulaMethodSource
     {
-        private Table Table { get; set; }
-
         private Controller Controller { get; set; }
 
-        public TableTemplate(Controller controller, Table table)
+        private Table Table { get; set; }
+
+        public TableFormulaMethodSource(Controller controller, Table table)
         {
             Table = table;
-
             Controller = controller;
         }
+
+
     }
 }

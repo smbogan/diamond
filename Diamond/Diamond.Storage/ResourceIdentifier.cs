@@ -19,6 +19,19 @@ namespace Diamond.Storage
             { ResourceType.View, "view" }
         };
 
+        public static bool IsResourceUrl(string url)
+        {
+            foreach(var v in extensions.Values)
+            {
+                if(url.EndsWith("." + v))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public ResourceType ResourceType { get; private set; }
 
         public ResourceIdentifier(ResourceType resourceType, params string[] identifierKeys)
@@ -57,6 +70,7 @@ namespace Diamond.Storage
                 if(identifier.EndsWith("." + kvp.Value))
                 {
                     resourceType = kvp.Key;
+                    break;
                 }
             }
 
@@ -79,6 +93,7 @@ namespace Diamond.Storage
                     || c == '-'
                     || c == '_'
                     || c == '/'
+                    || c == '.'
                     ))
                 {
                     throw new ArgumentException(string.Format("The character '{0}' is not allowed in a resource identifier.", c), nameof(identifier));

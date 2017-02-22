@@ -1,0 +1,32 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Diamond.Storage" #>
+
+
+<# switch(Cell.DataType)
+   { 
+     case CellDataType.Empty:
+	   #>-<#
+	   break;
+     case CellDataType.String:
+	   #><#= Cell.GetString() #><#
+	   break;
+     case CellDataType.Decimal:
+	   #><#= Cell.GetDecimal() #><#
+	   break;
+     case CellDataType.Integer:
+	   #><#= Cell.GetInteger() #><#
+	   break;
+     case CellDataType.Formula:
+	   #><#= RunFormula(Cell.GetFormula().Content) #><#
+	   break;
+	 default:
+	   #>(Unknown Cell Data Type)<#
+	   break;
+   }
+ #>
+
+

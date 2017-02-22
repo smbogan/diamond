@@ -8,6 +8,7 @@ namespace Diamond.Storage
 {
     public enum ResourceType
     {
+        Unknown,
         Text,
         Table,
         Script,

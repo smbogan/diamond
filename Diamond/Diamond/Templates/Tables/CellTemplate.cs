@@ -12,15 +12,16 @@ namespace Diamond.Templates.Tables
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
+    using Diamond.Storage;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class TableTemplate : TableTemplateBase
+    public partial class CellTemplate : CellTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,31 +29,97 @@ namespace Diamond.Templates.Tables
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<table>\r\n  <tr>\r\n    ");
+            this.Write("\r\n\r\n");
             
-            #line 9 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
- foreach(var h in Table.Headings)
-	   {
-	     
-            
-            #line default
-            #line hidden
-            this.Write("<th>");
-            
-            #line 11 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(h));
+            #line 9 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+ switch(Cell.DataType)
+   { 
+     case CellDataType.Empty:
+	   
             
             #line default
             #line hidden
-            this.Write("</th>");
+            this.Write("-");
             
-            #line 11 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
-	   } 
+	   break;
+     case CellDataType.String:
+	   
             
             #line default
             #line hidden
-            this.Write("  </tr>\r\n</table>");
+            
+            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetString()));
+            
+            #line default
+            #line hidden
+            
+            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+
+	   break;
+     case CellDataType.Decimal:
+	   
+            
+            #line default
+            #line hidden
+            
+            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetDecimal()));
+            
+            #line default
+            #line hidden
+            
+            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+
+	   break;
+     case CellDataType.Integer:
+	   
+            
+            #line default
+            #line hidden
+            
+            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetInteger()));
+            
+            #line default
+            #line hidden
+            
+            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+
+	   break;
+     case CellDataType.Formula:
+	   
+            
+            #line default
+            #line hidden
+            
+            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(RunFormula(Cell.GetFormula().Content)));
+            
+            #line default
+            #line hidden
+            
+            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+
+	   break;
+	 default:
+	   
+            
+            #line default
+            #line hidden
+            this.Write("(Unknown Cell Data Type)");
+            
+            #line 27 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+
+	   break;
+   }
+ 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -64,7 +131,7 @@ namespace Diamond.Templates.Tables
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class TableTemplateBase
+    public class CellTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

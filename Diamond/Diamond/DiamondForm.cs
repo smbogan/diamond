@@ -15,14 +15,18 @@ namespace Diamond
     {
         CefSharp.WinForms.ChromiumWebBrowser Browser { get; set; }
 
-        public DiamondForm()
+        private string startingUrl;
+
+        public DiamondForm(string openUrl = "www://root/fake.table")
         {
             InitializeComponent();
+
+            startingUrl = openUrl;
         }
 
         private void DiamondForm_Load(object sender, EventArgs e)
         {
-            Browser = new CefSharp.WinForms.ChromiumWebBrowser("www://web/index.html")
+            Browser = new CefSharp.WinForms.ChromiumWebBrowser(startingUrl)
             {
                 BrowserSettings = new BrowserSettings()
                 {
@@ -39,6 +43,13 @@ namespace Diamond
         private void button1_Click(object sender, EventArgs e)
         {
             Browser.ShowDevTools();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var f = new DiamondForm("www://root/");
+
+            f.Show();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using Diamond.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,26 +75,35 @@ namespace Diamond
                 Uri uri = new Uri(url);
                 String file = uri.Authority + uri.AbsolutePath;
 
+                if(file.StartsWith("root/"))
+                {
+                    file = file.Substring(5);
+                }
+
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 //String resourcePath = assembly.GetName().Name + "." + file.Replace("/", ".");
-                String resourcePath = "Diamond." + file.Replace("/", ".");
+                String resourcePath = "Diamond.web." + file.Replace("/", ".");
 
-                if (assembly.GetManifestResourceInfo(resourcePath) != null)
+                if(string.IsNullOrEmpty(Path.GetExtension(file)))
+                {
+                    //Directory browser
+                }
+                else if(ResourceIdentifier.IsResourceUrl(file))
+                {
+                    stream = controller.ProcessTemplate(new ResourceIdentifier(file));
+
+                    mimeType = MimeTypes.GetMimeType(".html");
+
+                    responseLength = stream.Length;
+                    Stream = stream;
+                }
+                else if (assembly.GetManifestResourceInfo(resourcePath) != null)
                 {
                     stream = assembly.GetManifestResourceStream(resourcePath);
                     mimeType = MimeTypes.GetMimeType(Path.GetExtension(file));
 
-                    if (file.EndsWith(".html"))
-                    {
-                        var resultStream = controller.ProcessTemplate(stream);
-                        responseLength = resultStream.Length;
-                        Stream = resultStream;
-                    }
-                    else
-                    {
-                        responseLength = stream.Length;
-                        Stream = stream;
-                    }
+                    responseLength = stream.Length;
+                    Stream = stream;
                 }
                 else
                 {
