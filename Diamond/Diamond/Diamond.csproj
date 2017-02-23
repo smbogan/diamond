@@ -123,15 +123,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.css.map" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.min.css.map" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap.css.map" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap.min.css.map" />
-    <EmbeddedResource Include="web\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <EmbeddedResource Include="web\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <EmbeddedResource Include="web\bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <EmbeddedResource Include="web\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <EmbeddedResource Include="web\js\jquery-3.1.1.min.map" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap-theme.css.map" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap-theme.min.css.map" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap.css.map" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap.min.css.map" />
+    <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <EmbeddedResource Include="static\js\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -154,15 +154,16 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TableTemplate1.cs</LastGenOutput>
     </Content>
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.css" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap-theme.min.css" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap.css" />
-    <EmbeddedResource Include="web\bootstrap\css\bootstrap.min.css" />
-    <EmbeddedResource Include="web\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <EmbeddedResource Include="web\bootstrap\js\bootstrap.js" />
-    <EmbeddedResource Include="web\bootstrap\js\bootstrap.min.js" />
-    <EmbeddedResource Include="web\bootstrap\js\npm.js" />
-    <EmbeddedResource Include="web\js\jquery-3.1.1.js" />
+    <EmbeddedResource Include="static\js\table.js" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap-theme.css" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap-theme.min.css" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap.css" />
+    <EmbeddedResource Include="static\bootstrap\css\bootstrap.min.css" />
+    <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <EmbeddedResource Include="static\bootstrap\js\bootstrap.js" />
+    <EmbeddedResource Include="static\bootstrap\js\bootstrap.min.js" />
+    <EmbeddedResource Include="static\bootstrap\js\npm.js" />
+    <EmbeddedResource Include="static\js\jquery-3.1.1.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

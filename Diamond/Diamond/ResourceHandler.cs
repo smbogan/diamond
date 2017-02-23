@@ -82,7 +82,7 @@ namespace Diamond
 
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 //String resourcePath = assembly.GetName().Name + "." + file.Replace("/", ".");
-                String resourcePath = "Diamond.web." + file.Replace("/", ".");
+                String resourcePath = "Diamond.static." + file.Replace("/", ".");
 
                 if(string.IsNullOrEmpty(Path.GetExtension(file)))
                 {

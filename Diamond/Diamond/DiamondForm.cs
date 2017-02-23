@@ -17,8 +17,12 @@ namespace Diamond
 
         private string startingUrl;
 
-        public DiamondForm(string openUrl = "www://root/fake.table")
+        Controller Controller { get; set; }
+
+        public DiamondForm(Controller controller, string openUrl = "www://root/fake.table")
         {
+            Controller = controller;
+
             InitializeComponent();
 
             startingUrl = openUrl;
@@ -37,6 +41,8 @@ namespace Diamond
 
             Controls.Add(Browser);
 
+            Browser.RegisterJsObject("controller", Controller);
+
             Browser.Dock = DockStyle.Fill;
         }
 
@@ -47,7 +53,7 @@ namespace Diamond
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var f = new DiamondForm("www://root/");
+            var f = new DiamondForm(Controller, "www://root/");
 
             f.Show();
         }

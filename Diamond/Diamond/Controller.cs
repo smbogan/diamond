@@ -1,5 +1,6 @@
 ﻿using Diamond.Storage;
 using Diamond.Templates;
+using Diamond.Templates.Tables;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +43,25 @@ namespace Diamond
 
         }
 
+        public string GetRawTableCell(string path, int row, int col)
+        {
+            return Cache.GetTable(new ResourceIdentifier(path))[row, col].ToString();
+        }
+
+        public string GetRenderedTableCell(string path, int row, int col)
+        {
+            var table = Cache.GetTable(new ResourceIdentifier(path));
+
+            return new CellTemplate(this, table, table[row, col], row, col).TransformText();
+        }
+
+        public void UpdateTableValue(string path, int row, int col, string value)
+        {
+            var table = Cache.GetTable(new ResourceIdentifier(path));
+
+            table[row, col] = Cell.Parse(value);
+        }
+
         System.Text.RegularExpressions.Regex pageTemplate =
             new System.Text.RegularExpressions.Regex("<% *?([a-zA-Z]+?) *?%>");
 
@@ -55,11 +75,11 @@ namespace Diamond
             {
                 case ResourceType.Table:
                     {
-                        var constructor = templateType.GetConstructor(new Type[] { typeof(Controller), typeof(Table) });
+                        var constructor = templateType.GetConstructor(new Type[] { typeof(Controller), typeof(Table), typeof(string) });
 
                         var table = Cache.GetTable(identifier);
 
-                        var template = constructor.Invoke(new object[] { this, table });
+                        var template = constructor.Invoke(new object[] { this, table, identifier.Identifier });
 
                         var transformMethod = templateType.GetMethod("TransformText", new Type[] { });
 

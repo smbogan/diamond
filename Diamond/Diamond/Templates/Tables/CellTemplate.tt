@@ -9,22 +9,22 @@
 <# switch(Cell.DataType)
    { 
      case CellDataType.Empty:
-	   #>-<#
+	   #><td class="td-cell td-cell-empty" table-row="<#= Row #>" table-col="<#= Column #>">-</td><#
 	   break;
      case CellDataType.String:
-	   #><#= Cell.GetString() #><#
+	   #><td class="td-cell td-cell-string" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetString() #></td><#
 	   break;
      case CellDataType.Decimal:
-	   #><#= Cell.GetDecimal() #><#
+	   #><td class="td-cell td-cell-decimal" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetDecimal() #></td><#
 	   break;
      case CellDataType.Integer:
-	   #><#= Cell.GetInteger() #><#
+	   #><td class="td-cell td-cell-integer" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetInteger() #></td><#
 	   break;
      case CellDataType.Formula:
-	   #><#= RunFormula(Cell.GetFormula().Content) #><#
+	   #><td class="td-cell td-cell-formula" table-row="<#= Row #>" table-col="<#= Column #>"><#= RunFormula(Cell.GetFormula().Content) #></td><#
 	   break;
 	 default:
-	   #>(Unknown Cell Data Type)<#
+	   #><td class="td-cell td-cell-unknown" table-row="<#= Row #>" table-col="<#= Column #>">(Unknown Cell Data Type)</td><#
 	   break;
    }
  #>

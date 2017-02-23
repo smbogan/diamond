@@ -14,8 +14,12 @@ namespace Diamond.Templates.Tables
 
         private Controller Controller { get; set; }
 
-        public TableTemplate(Controller controller, Table table)
+        private string Path { get; set; }
+
+        public TableTemplate(Controller controller, Table table, string path)
         {
+            Path = path;
+
             Table = table;
 
             Controller = controller;

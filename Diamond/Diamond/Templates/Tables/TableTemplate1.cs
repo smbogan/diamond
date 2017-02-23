@@ -18,7 +18,7 @@ namespace Diamond.Templates.Tables
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class TableTemplate : TableTemplateBase
     {
@@ -44,11 +44,16 @@ namespace Diamond.Templates.Tables
   <body>
 	<div class=""container"">
 	  <div class=""well"">
-        <table class=""table table-bordered"">
-          <tr>
-            ");
+        <table class=""table table-bordered"" table-path=""");
             
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 22 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Path));
+            
+            #line default
+            #line hidden
+            this.Write("\">\r\n          <tr>\r\n            ");
+            
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
  foreach(var h in Table.Headings)
         	   {
                  
@@ -57,14 +62,14 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("<th>");
             
-            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 26 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(h));
             
             #line default
             #line hidden
             this.Write("</th>");
             
-            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 26 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
         	   } 
             
@@ -72,7 +77,7 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("          </tr>\r\n\r\n\t\t  ");
             
-            #line 30 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 30 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 		  for(int r = 0; r < Table.Rows; r++)
 		  {
@@ -82,7 +87,7 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("<tr>\r\n\t\t\t");
             
-            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 34 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 			  for(int c = 0; c < Table.Columns; c++)
 			  {
@@ -90,16 +95,14 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
-            this.Write("<td>");
             
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new CellTemplate(Controller, Table, Table[r, c]).TransformText()));
+            #line 37 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new CellTemplate(Controller, Table, Table[r, c], r, c).TransformText()));
             
             #line default
             #line hidden
-            this.Write("</td>");
             
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 37 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 			  }
 			
@@ -108,7 +111,7 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("\t\t\t</tr>");
             
-            #line 40 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 40 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 		  }
 		  
@@ -123,6 +126,7 @@ namespace Diamond.Templates.Tables
     <script src=""js/jquery-3.1.1.js""></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src=""bootstrap/js/bootstrap.min.js""></script>
+	<script src=""js/table.js""></script>
   </body>
 </html>
 ");

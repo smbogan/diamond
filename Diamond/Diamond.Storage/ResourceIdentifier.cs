@@ -107,5 +107,28 @@ namespace Diamond.Storage
         {
             return File.Exists(Path.Combine(repositoryLocation, Identifier));
         }
+
+        public override bool Equals(object obj)
+        {
+            if (null == obj)
+                return false;
+
+            if (obj.GetType() != typeof(ResourceIdentifier))
+                return false;
+
+            var other = obj as ResourceIdentifier;
+
+            return Identifier.Equals(other.Identifier);
+        }
+
+        public override int GetHashCode()
+        {
+            return Identifier.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Identifier;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Diamond.Templates.Tables
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class CellTemplate : CellTemplateBase
     {
@@ -31,7 +31,7 @@ namespace Diamond.Templates.Tables
         {
             this.Write("\r\n\r\n");
             
-            #line 9 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 9 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
  switch(Cell.DataType)
    { 
      case CellDataType.Empty:
@@ -39,9 +39,23 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
-            this.Write("-");
+            this.Write("<td class=\"td-cell td-cell-empty\" table-row=\"");
             
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 12 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 12 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">-</td>");
+            
+            #line 12 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
      case CellDataType.String:
@@ -49,14 +63,30 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
+            this.Write("<td class=\"td-cell td-cell-string\" table-row=\"");
             
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 15 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 15 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 15 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetString()));
             
             #line default
             #line hidden
+            this.Write("</td>");
             
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 15 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
      case CellDataType.Decimal:
@@ -64,14 +94,30 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
+            this.Write("<td class=\"td-cell td-cell-decimal\" table-row=\"");
             
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 18 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 18 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 18 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetDecimal()));
             
             #line default
             #line hidden
+            this.Write("</td>");
             
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 18 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
      case CellDataType.Integer:
@@ -79,14 +125,30 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
+            this.Write("<td class=\"td-cell td-cell-integer\" table-row=\"");
             
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 21 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 21 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 21 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetInteger()));
             
             #line default
             #line hidden
+            this.Write("</td>");
             
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 21 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
      case CellDataType.Formula:
@@ -94,14 +156,30 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
+            this.Write("<td class=\"td-cell td-cell-formula\" table-row=\"");
             
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(RunFormula(Cell.GetFormula().Content)));
             
             #line default
             #line hidden
+            this.Write("</td>");
             
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
 	 default:
@@ -109,9 +187,23 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
-            this.Write("(Unknown Cell Data Type)");
+            this.Write("<td class=\"td-cell td-cell-unknown\" table-row=\"");
             
-            #line 27 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 27 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-col=\"");
+            
+            #line 27 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            
+            #line default
+            #line hidden
+            this.Write("\">(Unknown Cell Data Type)</td>");
+            
+            #line 27 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
 
 	   break;
    }

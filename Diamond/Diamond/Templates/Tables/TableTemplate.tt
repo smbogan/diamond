@@ -19,7 +19,7 @@
   <body>
 	<div class="container">
 	  <div class="well">
-        <table class="table table-bordered">
+        <table class="table table-bordered" table-path="<#= Path #>">
           <tr>
             <# foreach(var h in Table.Headings)
         	   {
@@ -34,7 +34,7 @@
 			<#
 			  for(int c = 0; c < Table.Columns; c++)
 			  {
-			    #><td><#= new CellTemplate(Controller, Table, Table[r, c]).TransformText() #></td><#
+			    #><#= new CellTemplate(Controller, Table, Table[r, c], r, c).TransformText() #><#
 			  }
 			#>
 			</tr><#
@@ -48,5 +48,6 @@
     <script src="js/jquery-3.1.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/table.js"></script>
   </body>
 </html>

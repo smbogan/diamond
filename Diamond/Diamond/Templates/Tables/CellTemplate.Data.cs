@@ -16,11 +16,17 @@ namespace Diamond.Templates.Tables
 
         Cell Cell { get; set; }
 
-        public CellTemplate(Controller controller, Table table, Cell cell)
+        int Row { get; set; }
+
+        int Column { get; set; }
+
+        public CellTemplate(Controller controller, Table table, Cell cell, int row, int col)
         {
             Controller = controller;
             Table = table;
             Cell = cell;
+            Row = row;
+            Column = col;
         }
 
         private string RunFormula(string formula)
