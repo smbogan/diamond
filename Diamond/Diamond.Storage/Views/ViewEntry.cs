@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diamond.Storage.Formulas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Diamond.Storage.Views
 
         public IViewField GetViewField()
         {
-            var compiler = new Formulas.FormulaCompiler(new Dictionary<string, object>()
+            var compiler = new Formulas.FormulaCompiler(new Dictionary<string, Value>()
             {
 
             }, new ViewMethodSource());

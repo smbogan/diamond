@@ -81,6 +81,7 @@
     <Compile Include="DiamondForm.Designer.cs">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Html.cs" />
     <Compile Include="TableFormulaMethodSource.cs" />
     <Compile Include="MimeTypes.cs" />
     <Compile Include="Program.cs" />
@@ -100,6 +101,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Variables.cs" />
     <EmbeddedResource Include="DiamondForm.resx">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +134,7 @@
     <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <EmbeddedResource Include="static\js\jquery-3.1.1.min.map" />
+    <EmbeddedResource Include="static\js\jquery.caret-1.5.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,6 +149,7 @@
     <Folder Include="Templates\Views\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="static\js\jquery.caret-1.5.2.min.js" />
     <Content Include="Templates\Tables\CellTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CellTemplate.cs</LastGenOutput>

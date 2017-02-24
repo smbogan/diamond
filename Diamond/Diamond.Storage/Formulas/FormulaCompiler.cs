@@ -12,10 +12,10 @@ namespace Diamond.Storage.Formulas
 {
     public class FormulaCompiler
     {
-        Dictionary<string, object> Variables;
+        IDictionary<string, Value> Variables;
         object MethodSource;
 
-        public FormulaCompiler(Dictionary<string, object> variables, object methodSource)
+        public FormulaCompiler(IDictionary<string, Value> variables, object methodSource)
         {
             Variables = variables;
             MethodSource = methodSource;
@@ -26,14 +26,15 @@ namespace Diamond.Storage.Formulas
             from sign in Parse.Char('#')
             from id in Identifier
             from trailing in Parse.WhiteSpace.Many()
-            select new CodeCastExpression(typeof(decimal), (new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(id))));
+            select new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(id));
 
         public static Parser<CodeExpression> ReplacementStringVariable =
             from leading in Parse.WhiteSpace.Many()
             from sign in Parse.Char('$')
             from id in Identifier
             from trailing in Parse.WhiteSpace.Many()
-            select new CodeMethodInvokeExpression(new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(id)), "ToString");
+                //select new CodeMethodInvokeExpression(new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(id)), "ToString");
+            select new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(id));
 
         public static Parser<string> Identifier =
             from leading in Parse.WhiteSpace.Many()
@@ -42,9 +43,9 @@ namespace Diamond.Storage.Formulas
             from trailing in Parse.WhiteSpace.Many()
             select new string(first.Concat(rest).ToArray());
 
-        public static Parser<CodeVariableReferenceExpression> Variable =
-            from variable in Identifier
-            select new CodeVariableReferenceExpression(variable);
+        //public static Parser<CodeVariableReferenceExpression> Variable =
+        //    from variable in Identifier
+        //    select new CodeVariableReferenceExpression(variable);
 
         public static Parser<string> MethodName =
             from name in Identifier
@@ -58,7 +59,7 @@ namespace Diamond.Storage.Formulas
 
             if (matches.Count == 0)
             {
-                return new CodePrimitiveExpression(str);
+                return new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(str));
             }
 
             List<CodeExpression> parts = new List<CodeExpression>();
@@ -67,25 +68,25 @@ namespace Diamond.Storage.Formulas
 
             if (start.Length > 0)
             {
-                parts.Add(new CodePrimitiveExpression(start));
+                parts.Add(new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(start)));
             }
 
             for(int m = 0; m < matches.Count; m++)
             {
                 string variable = matches[m].Value.Substring(2, matches[m].Value.Length - 3);
 
-                parts.Add(new CodeMethodInvokeExpression(new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(variable)), "ToString"));
+                parts.Add(new CodeObjectCreateExpression(typeof(Value), new CodeIndexerExpression(new CodeVariableReferenceExpression("Variables"), new CodePrimitiveExpression(variable))));
 
                 if(m == matches.Count - 1)
                 {
                     var sub = str.Substring(matches[m].Index + matches[m].Length);
-                    parts.Add(new CodePrimitiveExpression(sub));
+                    parts.Add(new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(sub)));
                 }
                 else
                 {
                     var sub = str.Substring(matches[m].Index + matches[m].Length,
                         matches[m + 1].Index - (matches[m].Index + matches[m].Length));
-                    parts.Add(new CodePrimitiveExpression(sub));
+                    parts.Add(new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(sub)));
                 }
             }
 
@@ -119,18 +120,18 @@ namespace Diamond.Storage.Formulas
             from endString in Parse.Char('"').Once()
             select ReplaceStringVariables(string.Concat(content));
 
-        public static Parser<CodePrimitiveExpression> SingleString =
+        public static Parser<CodeExpression> SingleString =
             from leading in Parse.WhiteSpace.Many()
             from startString in Parse.Char('\'').Once()
             from content in Parse.String("''").Text().Or(Parse.AnyChar.Except(Parse.Char('\'')).Many().Text()).Many()
             from endString in Parse.Char('\'').Once()
-            select new CodePrimitiveExpression(string.Concat(content));
+            select new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(string.Concat(content)));
 
-        public static Parser<CodePrimitiveExpression> Decimal =
+        public static Parser<CodeExpression> Decimal =
             from leading in Parse.WhiteSpace.Many()
             from n in Parse.DecimalInvariant
             from trailing in Parse.WhiteSpace.Many()
-            select new CodePrimitiveExpression(decimal.Parse(n));
+            select new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(decimal.Parse(n)));
 
         static Parser<CodeBinaryOperatorType> Operator(string op, CodeBinaryOperatorType opType)
         {
@@ -171,6 +172,10 @@ namespace Diamond.Storage.Formulas
             from rparen in Parse.Char(')').Once()
             select new CodeMethodInvokeExpression(new CodeVariableReferenceExpression("MethodSource"), methodName, parameters.GetOrDefault()?.ToArray() ?? new CodeExpression[] { });
 
+        public static Parser<CodeExpression> Formula =
+            from expr in Expression.End()
+            select expr;
+
         private static string GenerateNamespace()
         {
             return "FormulaNamespace";
@@ -188,7 +193,7 @@ namespace Diamond.Storage.Formulas
 
             typedec.IsClass = true;
 
-            typedec.Members.Add(new CodeMemberField(typeof(Dictionary<string, object>), "Variables"));
+            typedec.Members.Add(new CodeMemberField(typeof(IDictionary<string, Value>), "Variables"));
             typedec.Members.Add(new CodeMemberField(new CodeTypeReference("dynamic"), "MethodSource"));
 
             CodeConstructor ctor = new CodeConstructor()
@@ -199,7 +204,7 @@ namespace Diamond.Storage.Formulas
             ctor.Statements.Add(new CodeSnippetStatement(@"Variables = variables;"));
             ctor.Statements.Add(new CodeSnippetStatement(@"MethodSource = methodSource;"));
 
-            ctor.Parameters.Add(new CodeParameterDeclarationExpression(typeof(Dictionary<string, object>), "variables"));
+            ctor.Parameters.Add(new CodeParameterDeclarationExpression(typeof(IDictionary<string, Value>), "variables"));
             ctor.Parameters.Add(new CodeParameterDeclarationExpression(typeof(object), "methodSource"));
 
             typedec.Members.Add(ctor);
@@ -213,7 +218,17 @@ namespace Diamond.Storage.Formulas
 
             typedec.Members.Add(method);
 
-            var code = Expression.Parse(formula);
+            CodeExpression code;
+
+            try
+            {
+                code = Formula.Parse(formula);
+            }
+            catch(Exception e)
+            {
+                return () => new CompileError(new string[] { e.Message });
+            }
+            
 
             method.Statements.Add(new CodeMethodReturnStatement(code));
 
@@ -224,22 +239,36 @@ namespace Diamond.Storage.Formulas
             ns.Imports.Add(new CodeNamespaceImport("System"));
             ns.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             ns.Imports.Add(new CodeNamespaceImport("System.Text"));
+            ns.Imports.Add(new CodeNamespaceImport("Diamond.Storage"));
 
             unit.Namespaces.Add(ns);
             unit.ReferencedAssemblies.Add("System.dll");
             unit.ReferencedAssemblies.Add("System.Core.dll");
             unit.ReferencedAssemblies.Add("Microsoft.CSharp.dll");
+            unit.ReferencedAssemblies.Add("Diamond.Storage.dll");
 
             var result = compiler.CompileAssemblyFromDom(new System.CodeDom.Compiler.CompilerParameters()
             {
 
             }, unit);
 
+            if(result.Errors.Count > 0)
+            {
+                List<string> errors = new List<string>();
+
+                for(int e = 0; e < result.Errors.Count; e++)
+                {
+                    errors.Add(result.Errors[e].ErrorText);
+                }
+
+                return () => new CompileError(errors);
+            }
+
             var assembly = result.CompiledAssembly;
 
             var type = assembly.ExportedTypes.First();
 
-            var ctorInstance = type.GetConstructor(new Type[] { typeof(Dictionary<string, object>), typeof(object) });
+            var ctorInstance = type.GetConstructor(new Type[] { typeof(IDictionary<string, Value>), typeof(object) });
 
             object obj = ctorInstance.Invoke(new object[] { Variables, MethodSource });
 

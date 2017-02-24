@@ -31,7 +31,7 @@ namespace Diamond.Templates.Tables
 
         private string RunFormula(string formula)
         {
-            object result = new FormulaCompiler(new Dictionary<string, object>(), new TableFormulaMethodSource(Controller, Table)).Compile(formula)();
+            object result = new FormulaCompiler(new Variables((f) => null), new TableFormulaMethodSource(Controller, Table)).Compile(formula)();
 
             return result.ToString();
         }

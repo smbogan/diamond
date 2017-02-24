@@ -51,6 +51,20 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
+            this.Write("\" table-rows=\"");
+            
+            #line 22 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Table.Rows));
+            
+            #line default
+            #line hidden
+            this.Write("\" table-cols=\"");
+            
+            #line 22 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Table.Columns));
+            
+            #line default
+            #line hidden
             this.Write("\">\r\n          <tr>\r\n            ");
             
             #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
@@ -124,6 +138,7 @@ namespace Diamond.Templates.Tables
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src=""js/jquery-3.1.1.js""></script>
+	<script src=""js/jquery.caret-1.5.2.min.js""></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src=""bootstrap/js/bootstrap.min.js""></script>
 	<script src=""js/table.js""></script>

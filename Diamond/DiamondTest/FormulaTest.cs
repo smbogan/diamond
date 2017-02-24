@@ -33,17 +33,17 @@ namespace DiamondTest
         {
             var t = this;
 
-            var fc = new FormulaCompiler(new Dictionary<string, object>()
+            var fc = new FormulaCompiler(new Dictionary<string, Value>()
             {
-                ["X"] = "Y",
-                ["A"] = 45.4m
+                ["X"] = new Value("Y"),
+                ["A"] = new Value(45.4m)
             }, this);
             
             var r = fc.Compile(@"4.05 + 45.01 + ""$(X)"" + M($X) + Z(#A) + "" - "" + Cappy($X,#A)")();
 
 
 
-            var sc = new FormulaCompiler(new Dictionary<string, object>()
+            var sc = new FormulaCompiler(new Dictionary<string, Value>()
             {
 
             }, this);
@@ -124,15 +124,6 @@ namespace DiamondTest
             var resultage = methodInfo.Invoke(obj, new object[] { });
 
             return;
-
-            //var doubleParseResult = FormulaCompiler.DoubleString.Parse(@"     ""he""""llo""       ");
-            //(doubleParseResult.Value as string).Should().Be(@"he""""llo");
-
-            var singleParseResult = FormulaCompiler.SingleString.Parse(@"     'he''llo'       ");
-            (singleParseResult.Value as string).Should().Be(@"he''llo");
-
-            var decimalParseResult = FormulaCompiler.Decimal.Parse("  56.34    ");
-            ((decimal)decimalParseResult.Value).Should().Be(56.34m);
 
         }
     }

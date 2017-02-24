@@ -135,7 +135,21 @@ namespace Diamond.Storage
                 return new Cell(new Formula(v.Substring(1)));
             }
 
-            throw new Exception("Unknown entry in the table.");
+            decimal decimalValue;
+
+            if(decimal.TryParse(v, out decimalValue))
+            {
+                return new Cell(decimalValue);
+            }
+
+            int intValue;
+
+            if(int.TryParse(v, out intValue))
+            {
+                return new Cell(intValue);
+            }
+
+            return new Cell(v);
         }
 
         public override string ToString()

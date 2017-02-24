@@ -9,22 +9,22 @@
 <# switch(Cell.DataType)
    { 
      case CellDataType.Empty:
-	   #><td class="td-cell td-cell-empty" table-row="<#= Row #>" table-col="<#= Column #>">-</td><#
+	   #><td class="td-cell td-cell-empty td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>">-</td><#
 	   break;
      case CellDataType.String:
-	   #><td class="td-cell td-cell-string" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetString() #></td><#
+	   #><td class="td-cell td-cell-string td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Html.Escape(Cell.GetString()) #></td><#
 	   break;
      case CellDataType.Decimal:
-	   #><td class="td-cell td-cell-decimal" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetDecimal() #></td><#
+	   #><td class="td-cell td-cell-decimal td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetDecimal() #></td><#
 	   break;
      case CellDataType.Integer:
-	   #><td class="td-cell td-cell-integer" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetInteger() #></td><#
+	   #><td class="td-cell td-cell-integer td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetInteger() #></td><#
 	   break;
      case CellDataType.Formula:
-	   #><td class="td-cell td-cell-formula" table-row="<#= Row #>" table-col="<#= Column #>"><#= RunFormula(Cell.GetFormula().Content) #></td><#
+	   #><td class="td-cell td-cell-formula td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Html.Escape(RunFormula(Cell.GetFormula().Content)) #></td><#
 	   break;
 	 default:
-	   #><td class="td-cell td-cell-unknown" table-row="<#= Row #>" table-col="<#= Column #>">(Unknown Cell Data Type)</td><#
+	   #><td class="td-cell td-cell-unknown td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>">(Unknown Cell Data Type)</td><#
 	   break;
    }
  #>

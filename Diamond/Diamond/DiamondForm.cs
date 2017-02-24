@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using Diamond.Storage.Formulas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,8 @@ namespace Diamond
             Controller = controller;
 
             InitializeComponent();
+
+            Text = Text += " - " + openUrl;
 
             startingUrl = openUrl;
         }
@@ -53,6 +56,15 @@ namespace Diamond
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var variables = Diamond.Storage.Formulas.FormulaVariableExtractor.GetVariables(@"$y + 5 + "" $(asdf) """);
+
+            var table = Controller.Cache.GetTable(new Storage.ResourceIdentifier("fake.table"));
+
+            object result = new FormulaCompiler(new Variables((k) => new Value(56m)), new TableFormulaMethodSource(Controller, table)).Compile(" $z + 5 + 6")();
+
+            var res =  result.ToString();
+
+            return;
             var f = new DiamondForm(Controller, "www://root/");
 
             f.Show();
