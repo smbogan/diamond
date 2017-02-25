@@ -54,7 +54,7 @@ namespace Diamond.Storage
             }
         }
 
-        public void AddRow(int rowPosition)
+        public void InsertRow(int rowPosition)
         {
             List<Cell> row = new List<Cell>();
 
@@ -68,7 +68,12 @@ namespace Diamond.Storage
 
         public void AddRow()
         {
-            AddRow(Rows);
+            InsertRow(Rows);
+        }
+
+        public void DeleteRow(int rowPosition)
+        {
+            data.RemoveAt(rowPosition);
         }
 
         public void AddColumn(string name, int columnPosition)

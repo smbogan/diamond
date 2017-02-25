@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diamond.Storage.Formulas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,12 @@ namespace Diamond.Storage
         {
             content = "";
             DataType = CellDataType.Empty;
+        }
+
+        public Cell(Cell other)
+        {
+            this.content = other.content;
+            this.DataType = other.DataType;
         }
 
         public Cell(string value)

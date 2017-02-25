@@ -16,7 +16,8 @@ namespace Diamond.Storage
             { ResourceType.Table, "table" },
             { ResourceType.Text, "txt" },
             { ResourceType.Script, "script" },
-            { ResourceType.View, "view" }
+            { ResourceType.View, "view" },
+            { ResourceType.ViewTemplate, "viewtemplate"}
         };
 
         public static bool IsResourceUrl(string url)

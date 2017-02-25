@@ -12,6 +12,7 @@ namespace Diamond.Storage
         Text,
         Table,
         Script,
-        View
+        View,
+        ViewTemplate
     }
 }

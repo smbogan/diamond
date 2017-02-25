@@ -11,22 +11,12 @@ namespace Diamond.Storage.Views
     {
         public string Name { get; private set; }
 
-        public string Formula { get; private set; }
+        public Cell Value { get; private set; }
 
-        public IViewField GetViewField()
-        {
-            var compiler = new Formulas.FormulaCompiler(new Dictionary<string, Value>()
-            {
-
-            }, new ViewMethodSource());
-
-            return compiler.Compile(Formula)() as IViewField;
-        }
-
-        public ViewEntry(string name, string formula)
+        public ViewEntry(string name, Cell value)
         {
             Name = name;
-            Formula = formula;
+            Value = value;
         }
     }
 }

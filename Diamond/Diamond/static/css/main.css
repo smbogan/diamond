@@ -1,0 +1,28 @@
+﻿
+.table {
+	table-layout:fixed;
+}
+
+input {
+	height: 100%;
+	display: inline-block;
+	position: relative;
+}
+
+td {
+	padding: 1px;
+}
+
+.content {
+	margin-top: 20px;
+}
+
+.table-save-container {
+
+	float: left;
+}
+
+.table-add-container {
+
+	float: right;
+}

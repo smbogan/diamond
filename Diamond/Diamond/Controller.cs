@@ -37,10 +37,6 @@ namespace Diamond
         {
             Repository repo = new Repository("C:\\DiamondData", "Shaun Bogan", "smbogan@gmail.com");
             Cache = new Cache(repo);
-
-
-
-
         }
 
         public string GetRawTableCell(string path, int row, int col)
@@ -123,6 +119,88 @@ namespace Diamond
             //var ms = new System.IO.MemoryStream(Encoding.UTF8.GetBytes(processedPage));
 
             //return ms;
+        }
+
+        public void SaveTable(string path)
+        {
+            Cache.SaveTable(new ResourceIdentifier(path));
+        }
+
+        public void AddTableRow(string path)
+        {
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+            table.AddRow();
+        }
+
+        public void AddTableRowAbove(string path, int currentRow)
+        {
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            table.InsertRow(currentRow);
+        }
+
+        public void AddTableRowBelow(string path, int currentRow)
+        {
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            table.InsertRow(currentRow + 1);
+        }
+
+        List<Cell> copiedCells = null;
+
+        public void CopyTableRow(string path, int currentRow)
+        {
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            copiedCells = new List<Cell>();
+
+            for (int c = 0; c < table.Columns; c++)
+            {
+                copiedCells.Add(new Cell(table[currentRow, c]));
+            }
+        }
+
+        public void PasteTableRowAbove(string path, int currentRow)
+        {
+            if (copiedCells == null)
+                return;
+
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            if (copiedCells.Count != table.Columns)
+                return;
+
+            table.InsertRow(currentRow);
+
+            for(int c = 0; c < table.Columns; c++)
+            {
+                table[currentRow, c] = copiedCells[c];
+            }
+        }
+
+        public void PasteTableRowBelow(string path, int currentRow)
+        {
+            if (copiedCells == null)
+                return;
+
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            if (copiedCells.Count != table.Columns)
+                return;
+
+            table.InsertRow(currentRow + 1);
+
+            for (int c = 0; c < table.Columns; c++)
+            {
+                table[currentRow + 1, c] = copiedCells[c];
+            }
+        }
+
+        public void DeleteTableRow(string path, int currentRow)
+        {
+            Table table = Cache.GetTable(new ResourceIdentifier(path));
+
+            table.DeleteRow(currentRow);
         }
     }
 }

@@ -21,7 +21,7 @@
 	   #><td class="td-cell td-cell-integer td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetInteger() #></td><#
 	   break;
      case CellDataType.Formula:
-	   #><td class="td-cell td-cell-formula td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Html.Escape(RunFormula(Cell.GetFormula().Content)) #></td><#
+	   #><td class="td-cell td-cell-formula td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;<#= Html.Escape(RunFormula(Cell.GetFormula().Content)) #></td><#
 	   break;
 	 default:
 	   #><td class="td-cell td-cell-unknown td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>">(Unknown Cell Data Type)</td><#

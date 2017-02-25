@@ -240,7 +240,7 @@ namespace Diamond.Templates.Tables
             
             #line default
             #line hidden
-            this.Write("\">");
+            this.Write("\"><i class=\"fa fa-calculator\" aria-hidden=\"true\"></i>&nbsp;");
             
             #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(RunFormula(Cell.GetFormula().Content))));

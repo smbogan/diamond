@@ -1,22 +1,8 @@
-﻿//(function ($, undefined) {
-//    $.fn.getCursorPosition = function () {
-//        var el = $(this).get(0);
-//        var pos = 0;
-//        if ('selectionStart' in el) {
-//            pos = el.selectionStart;
-//        } else if ('selection' in document) {
-//            el.focus();
-//            var Sel = document.selection.createRange();
-//            var SelLength = document.selection.createRange().text.length;
-//            Sel.moveStart('character', -el.value.length);
-//            pos = Sel.text.length - SelLength;
-//        }
-//        return pos;
-//    }
-//})(jQuery);
-
+﻿
 $(function ()
 {
+    var path = $('table').attr('table-path');
+
     var tableSize = function () {
         var tbl = $("table");
 
@@ -45,7 +31,7 @@ $(function ()
     var exitEditing = function (save) {
         var editingTD = $(".editing");
         
-        var path = $('table').attr('table-path');
+        
 
         var row = parseInt(editingTD.attr('table-row'));
         var col = parseInt(editingTD.attr('table-col'));
@@ -69,15 +55,13 @@ $(function ()
         var target = $(".td-" + row + "-" + col);
 
         if (!target.is(".editing")) {
-            var path = $('table').attr('table-path');
-
 
             var row = parseInt(target.attr('table-row'));
             var col = parseInt(target.attr('table-col'));
 
             var rawData = window.controller.getRawTableCell(path, row, col);
 
-            var e = $('<input type="text"></input>');
+            var e = $('<input type="text" style="box-sizing: border-box; width: 100%;"></input>');
             e.val(rawData);
 
             target.empty();
@@ -154,4 +138,60 @@ $(function ()
     });
 
     
+    $(".save-table-button").click(function () {
+        window.controller.saveTable(path);
+    });
+
+    $(".add-row-button").click(function () {
+        window.controller.addTableRow(path);
+        document.location.reload(true);
+    });
+
+    $.contextMenu({
+        selector: '.row-handle',
+        callback: function (key, options) {
+            var target = $(this);
+
+            var currentRow = parseInt(target.parent().attr("row"));
+
+            var reload = true;
+
+            switch (key) {
+                case "add-above":
+                    window.controller.addTableRowAbove(path, currentRow);
+                    break;
+                case "add-below":
+                    window.controller.addTableRowBelow(path, currentRow);
+                    break;
+                case "copy":
+                    window.controller.copyTableRow(path, currentRow);
+                    break;
+                case "paste-above":
+                    window.controller.pasteTableRowAbove(path, currentRow);
+                    break;
+                case "paste-below":
+                    window.controller.pasteTableRowBelow(path, currentRow);
+                    break;
+                case "delete":
+                    window.controller.deleteTableRow(path, currentRow);
+                    break;
+                default:
+                    reload = false;
+                    break;
+            }
+
+            if (reload) {
+                document.location.reload(true);
+            }
+        },
+        items: {
+            "add-above": { name: "Add Row Above", icon: "add" },
+            "add-below": { name: "Add Row Below", icon: "add" },
+            "copy": { name: "Copy", icon: "copy" },
+            "paste-above": { name: "Paste Row Above", icon: "paste" },
+            "paste-below": { name: "Paste Row Below", icon: "paste" },
+            "sep1": "---------",
+            "delete": { name: "Delete", icon: "delete" }
+        }
+    });
 });

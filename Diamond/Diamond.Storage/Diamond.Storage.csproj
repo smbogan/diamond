@@ -91,10 +91,12 @@
     <Compile Include="Table.cs" />
     <Compile Include="TableMethodSource.cs" />
     <Compile Include="Views\IViewField.cs" />
-    <Compile Include="Views\ViewLink.cs" />
     <Compile Include="Views\View.cs" />
-    <Compile Include="Views\ViewCurrency.cs" />
     <Compile Include="Views\ViewEntry.cs" />
+    <Compile Include="Views\ViewLink.cs" />
+    <Compile Include="Views\ViewTemplate.cs" />
+    <Compile Include="Views\ViewCurrency.cs" />
+    <Compile Include="Views\ViewTemplateEntry.cs" />
     <Compile Include="Views\ViewMethodSource.cs" />
     <Compile Include="Views\ViewNumber.cs" />
     <Compile Include="Views\ViewOptions.cs" />

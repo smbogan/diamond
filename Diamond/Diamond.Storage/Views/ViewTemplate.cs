@@ -1,15 +1,18 @@
-﻿using Sprache;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sprache;
 
 namespace Diamond.Storage.Views
 {
-    public class View
+    public class ViewTemplate : IEnumerable<ViewTemplateEntry>
     {
+
+
         private static Parser<string> DoubleString =
             from leading in Parse.WhiteSpace.Many()
             from startString in Parse.Char('"').Once()
@@ -18,16 +21,16 @@ namespace Diamond.Storage.Views
             from trailing in Parse.WhiteSpace.Many()
             select string.Concat(content);
 
-        private static Parser<ViewEntry> Entry =
+        private static Parser<ViewTemplateEntry> Entry =
             from name in DoubleString
             from x in Parse.Char(':').Once()
             from w in Parse.WhiteSpace.Many()
-            from value in Parse.AnyChar.Many().End().Text()
-            select new ViewEntry(name, Cell.Parse(value));
+            from formula in Parse.AnyChar.Many().End().Text()
+            select new ViewTemplateEntry(name, formula);
 
-        private List<ViewEntry> Entries { get; set; } = new List<ViewEntry>();
+        private List<ViewTemplateEntry> Entries { get; set; } = new List<ViewTemplateEntry>();
 
-        public View(Stream stream)
+        public ViewTemplate(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -44,6 +47,22 @@ namespace Diamond.Storage.Views
                         entry = sr.ReadLine();
                     } while (entry != null);
                 }
+            }
+        }
+
+        public IEnumerator<ViewTemplateEntry> GetEnumerator()
+        {
+            foreach(var ve in Entries)
+            {
+                yield return ve;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            foreach (var ve in Entries)
+            {
+                yield return ve;
             }
         }
     }

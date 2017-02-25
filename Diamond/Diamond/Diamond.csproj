@@ -135,6 +135,17 @@
     <EmbeddedResource Include="static\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <EmbeddedResource Include="static\js\jquery-3.1.1.min.map" />
     <EmbeddedResource Include="static\js\jquery.caret-1.5.2.min.map" />
+    <EmbeddedResource Include="static\fontawesome\fonts\fontawesome-webfont.eot" />
+    <EmbeddedResource Include="static\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <EmbeddedResource Include="static\fontawesome\fonts\fontawesome-webfont.woff" />
+    <EmbeddedResource Include="static\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <EmbeddedResource Include="static\fontawesome\fonts\FontAwesome.otf" />
+    <EmbeddedResource Include="static\jcontext\font\context-menu-icons.eot" />
+    <EmbeddedResource Include="static\jcontext\font\context-menu-icons.ttf" />
+    <EmbeddedResource Include="static\jcontext\font\context-menu-icons.woff" />
+    <EmbeddedResource Include="static\jcontext\font\context-menu-icons.woff2" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.min.css.map" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,10 +157,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="static\images\" />
     <Folder Include="Templates\Views\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="static\js\jquery.caret-1.5.2.min.js" />
+    <EmbeddedResource Include="static\css\main.css" />
+    <EmbeddedResource Include="static\fontawesome\css\font-awesome.css" />
+    <EmbeddedResource Include="static\fontawesome\css\font-awesome.min.css" />
+    <EmbeddedResource Include="static\fontawesome\fonts\fontawesome-webfont.svg" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.css" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.js" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.min.css" />
+    <EmbeddedResource Include="static\jcontext\jquery.contextMenu.min.js" />
+    <EmbeddedResource Include="static\jcontext\jquery.ui.position.js" />
+    <EmbeddedResource Include="static\jcontext\jquery.ui.position.min.js" />
     <Content Include="Templates\Tables\CellTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CellTemplate.cs</LastGenOutput>
