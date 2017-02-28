@@ -17,9 +17,6 @@
      case CellDataType.Decimal:
 	   #><td class="td-cell td-cell-decimal td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetDecimal() #></td><#
 	   break;
-     case CellDataType.Integer:
-	   #><td class="td-cell td-cell-integer td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><#= Cell.GetInteger() #></td><#
-	   break;
      case CellDataType.Formula:
 	   #><td class="td-cell td-cell-formula td-<#= Row #>-<#= Column #>" table-row="<#= Row #>" table-col="<#= Column #>"><i class="fa fa-calculator" aria-hidden="true"></i>&nbsp;<#= Html.Escape(RunFormula(Cell.GetFormula().Content)) #></td><#
 	   break;

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Diamond.Templates.Tables
 {
-    [Page(ResourceType.Table)]
     public partial class TableTemplate
     {
         private Table Table { get; set; }

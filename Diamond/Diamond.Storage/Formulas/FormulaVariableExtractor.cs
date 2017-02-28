@@ -67,7 +67,7 @@ namespace Diamond.Storage.Formulas
             from startString in Parse.Char('"').Once()
             from content in Parse.String("\"\"").Text().Or(Parse.AnyChar.Except(Parse.Char('"')).Many().Text()).Many()
             from endString in Parse.Char('"').Once()
-            select ReplaceStringVariables(string.Concat(content));
+            select ReplaceStringVariables(string.Concat(content).Replace("\"\"", "\""));
 
         private static Parser<string[]> SingleString =
             from leading in Parse.WhiteSpace.Many()
@@ -121,9 +121,13 @@ namespace Diamond.Storage.Formulas
             from rparen in Parse.Char(')').Once()
             select parameters.GetOrDefault()?.ToArray() ?? new string[] { };
 
+        private static Parser<string[]> Formula =
+            from expr in Expression.End()
+            select expr;
+
         public static string[] GetVariables(string formula)
         {
-            return Expression.Parse(formula);
+            return Formula.Parse(formula);
         }
     }
 }

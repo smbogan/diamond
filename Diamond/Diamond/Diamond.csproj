@@ -88,7 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHandler.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
-    <Compile Include="Templates\PageAttribute.cs" />
+    <Compile Include="TemplatedView.cs" />
     <Compile Include="Templates\Tables\CellTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -101,7 +101,52 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Views\CurrencyTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\CurrencyTemplate.Data.cs" />
+    <Compile Include="Templates\Views\FieldTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FieldTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\FieldTemplate.Data.cs" />
+    <Compile Include="Templates\Views\HeadingTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HeadingTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\HeadingTemplate.Data.cs" />
+    <Compile Include="Templates\Views\InputTextTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InputTextTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\InputTextTemplate.Data.cs" />
+    <Compile Include="Templates\Views\LinkTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinkTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\LinkTemplate.Data.cs" />
+    <Compile Include="Templates\Views\NumberTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NumberTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\NumberTemplate.Data.cs" />
+    <Compile Include="ViewFactory.cs" />
+    <Compile Include="Templates\Views\ViewTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\ViewTemplate.Data.cs" />
     <Compile Include="Variables.cs" />
+    <Compile Include="ViewField.cs" />
+    <Compile Include="ViewMethodSource.cs" />
     <EmbeddedResource Include="DiamondForm.resx">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -158,9 +203,37 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\images\" />
-    <Folder Include="Templates\Views\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="static\js\view.js" />
+    <Content Include="Templates\Views\CurrencyTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CurrencyTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\FieldTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FieldTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\HeadingTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HeadingTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\InputTextTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>InputTextTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\LinkTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LinkTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\NumberTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NumberTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\ViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewTemplate.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="static\js\jquery.caret-1.5.2.min.js" />
     <EmbeddedResource Include="static\css\main.css" />
     <EmbeddedResource Include="static\fontawesome\css\font-awesome.css" />

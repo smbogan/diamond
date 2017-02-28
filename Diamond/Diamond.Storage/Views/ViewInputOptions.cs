@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Diamond.Storage.Views
 {
-    public class ViewOptions : IViewField
+    public class ViewInputOptions : IViewField
     {
         public IEnumerable<string> Options
         {
@@ -19,11 +19,32 @@ namespace Diamond.Storage.Views
             }
         }
 
+        public ViewTypes ViewType
+        {
+            get
+            {
+                return ViewTypes.Options;
+            }
+        }
+
+        public bool ProvidesEntry
+        {
+            get
+            {
+                return false;
+            }
+        }
+
         private string[] options;
 
-        public ViewOptions(params string[] options)
+        public ViewInputOptions(params string[] options)
         {
             this.options = options;
+        }
+
+        public Formula GetEntry()
+        {
+            throw new InvalidOperationException();
         }
     }
 }

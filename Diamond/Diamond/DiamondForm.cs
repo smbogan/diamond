@@ -56,18 +56,15 @@ namespace Diamond
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var variables = Diamond.Storage.Formulas.FormulaVariableExtractor.GetVariables(@"$y + 5 + "" $(asdf) """);
-
-            var table = Controller.Cache.GetTable(new Storage.ResourceIdentifier("fake.table"));
-
-            object result = new FormulaCompiler(new Variables((k) => new Value(56m)), new TableFormulaMethodSource(Controller, table)).Compile(" $z + 5 + 6")();
-
-            var res =  result.ToString();
-
-            return;
-            var f = new DiamondForm(Controller, "www://root/");
+            var f = new DiamondForm(Controller, "www://root/fake.table");
 
             f.Show();
+        }
+
+        private void DiamondForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Application.OpenForms.Count == 0)
+                Application.Exit();
         }
     }
 }

@@ -63,6 +63,7 @@
             this.Controls.Add(this.button1);
             this.Name = "DiamondForm";
             this.Text = "Diamond Mine";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DiamondForm_FormClosed);
             this.Load += new System.EventHandler(this.DiamondForm_Load);
             this.ResumeLayout(false);
 

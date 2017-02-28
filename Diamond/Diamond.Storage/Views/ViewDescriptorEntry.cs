@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Diamond.Storage.Views
 {
-    public class ViewTemplateEntry
+    public class ViewDescriptorEntry
     {
         public string Name { get; private set; }
 
@@ -18,12 +18,12 @@ namespace Diamond.Storage.Views
             var compiler = new Formulas.FormulaCompiler(new Dictionary<string, Value>()
             {
 
-            }, new ViewMethodSource());
+            }, new ViewDescriptorMethodSource());
 
             return compiler.Compile(Formula)() as IViewField;
         }
 
-        public ViewTemplateEntry(string name, string formula)
+        public ViewDescriptorEntry(string name, string formula)
         {
             Name = name;
             Formula = formula;

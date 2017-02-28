@@ -1,0 +1,51 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Diamond.Storage.Views" #>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title></title>
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="jcontext/jquery.contextMenu.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+
+  </head>
+  <body>
+	<div class="container">
+	  <div class="content">
+	    <table class="table table-bordered table-striped view-table" view-path="<#= Html.Escape(Path) #>">
+		  <!--<thead>
+		    <tr><th>Key</th><th>Value</th></tr>
+		  </thead>-->
+		  <tbody>
+            <# foreach(var field in TemplatedView)
+	           {
+	     	      #><#= (new FieldTemplate(field)).TransformText() #><#
+	      	   } #>
+		  </tbody>
+		</table>
+		<div class="view-save-container"><button class="save-view-button"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;Save</i></button></div>
+	  </div>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.1.1.js"></script>
+	<script src="js/jquery.caret-1.5.2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="jcontext/jquery.ui.position.min.js"></script>
+	<script src="jcontext/jquery.contextMenu.min.js"></script>
+
+	<script src="js/view.js"></script>
+  </body>
+</html>

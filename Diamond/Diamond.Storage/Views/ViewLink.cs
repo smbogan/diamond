@@ -10,9 +10,30 @@ namespace Diamond.Storage.Views
     {
         public string Link { get; private set; }
 
+        public ViewTypes ViewType
+        {
+            get
+            {
+                return ViewTypes.Link;
+            }
+        }
+
+        public bool ProvidesEntry
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public ViewLink(string link)
         {
             Link = link;
+        }
+
+        public Formula GetEntry()
+        {
+            return new Formula('"' + Link + '"');
         }
     }
 }

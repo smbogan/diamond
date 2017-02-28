@@ -6,20 +6,13 @@ using System.Threading.Tasks;
 
 namespace Diamond.Storage.Views
 {
-    public class ViewNumber : IViewField
+    public class ViewInputText : IViewField
     {
-        string Formula { get; set; }
-
-        public ViewNumber(string formula)
-        {
-            Formula = formula;
-        }
-
         public bool ProvidesEntry
         {
             get
             {
-                return true;
+                return false;
             }
         }
 
@@ -27,13 +20,13 @@ namespace Diamond.Storage.Views
         {
             get
             {
-                return ViewTypes.Number;
+                return ViewTypes.InputText;
             }
         }
 
         public Formula GetEntry()
         {
-            return new Storage.Formula(Formula);
+            throw new InvalidOperationException();
         }
     }
 }

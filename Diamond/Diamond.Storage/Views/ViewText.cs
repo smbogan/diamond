@@ -12,5 +12,26 @@ namespace Diamond.Storage.Views
         {
 
         }
+
+        public bool ProvidesEntry
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public ViewTypes ViewType
+        {
+            get
+            {
+                return ViewTypes.Text;
+            }
+        }
+
+        public Formula GetEntry()
+        {
+            throw new InvalidOperationException();
+        }
     }
 }

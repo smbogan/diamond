@@ -5,10 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Diamond.Storage.Views
 {
-    public class View
+    public class View : IEnumerable<ViewEntry>
     {
         private static Parser<string> DoubleString =
             from leading in Parse.WhiteSpace.Many()
@@ -25,13 +26,25 @@ namespace Diamond.Storage.Views
             from value in Parse.AnyChar.Many().End().Text()
             select new ViewEntry(name, Cell.Parse(value));
 
+        public string Descriptor { get; private set; }
+
         private List<ViewEntry> Entries { get; set; } = new List<ViewEntry>();
+
+        public void Add(ViewEntry entry)
+        {
+            Entries.Add(entry);
+        }
 
         public View(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
                 string entry = sr.ReadLine();
+
+                //First line is the template path
+                Descriptor = entry;
+
+                entry = sr.ReadLine();
 
                 if (entry != null)
                 {
@@ -45,6 +58,32 @@ namespace Diamond.Storage.Views
                     } while (entry != null);
                 }
             }
+        }
+
+        public void Write(Stream stream)
+        {
+            using (var sw = new StreamWriter(stream, Encoding.UTF8, 4096, true))
+            {
+                sw.WriteLine(Descriptor);
+
+                foreach(var entry in this)
+                {
+                    if (entry.Value != null && entry.Value.DataType != CellDataType.Empty)
+                    {
+                        sw.Write(@"""{0}"": {1}", entry.Name.Replace("\"", "\"\""), entry.Value.ToString());
+                    }
+                }
+            }
+        }
+
+        public IEnumerator<ViewEntry> GetEnumerator()
+        {
+            return ((IEnumerable<ViewEntry>)Entries).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<ViewEntry>)Entries).GetEnumerator();
         }
     }
 }

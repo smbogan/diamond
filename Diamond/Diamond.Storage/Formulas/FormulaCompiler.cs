@@ -118,14 +118,14 @@ namespace Diamond.Storage.Formulas
             from startString in Parse.Char('"').Once()
             from content in Parse.String("\"\"").Text().Or(Parse.AnyChar.Except(Parse.Char('"')).Many().Text()).Many()
             from endString in Parse.Char('"').Once()
-            select ReplaceStringVariables(string.Concat(content));
+            select ReplaceStringVariables(string.Concat(content).Replace("\"\"", "\""));
 
         public static Parser<CodeExpression> SingleString =
             from leading in Parse.WhiteSpace.Many()
             from startString in Parse.Char('\'').Once()
             from content in Parse.String("''").Text().Or(Parse.AnyChar.Except(Parse.Char('\'')).Many().Text()).Many()
             from endString in Parse.Char('\'').Once()
-            select new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(string.Concat(content)));
+            select new CodeObjectCreateExpression(typeof(Value), new CodePrimitiveExpression(string.Concat(content).Replace("''", "'")));
 
         public static Parser<CodeExpression> Decimal =
             from leading in Parse.WhiteSpace.Many()
@@ -173,6 +173,7 @@ namespace Diamond.Storage.Formulas
             select new CodeMethodInvokeExpression(new CodeVariableReferenceExpression("MethodSource"), methodName, parameters.GetOrDefault()?.ToArray() ?? new CodeExpression[] { });
 
         public static Parser<CodeExpression> Formula =
+            from formulaMark in Parse.Char('=').Optional()
             from expr in Expression.End()
             select expr;
 
@@ -226,7 +227,7 @@ namespace Diamond.Storage.Formulas
             }
             catch(Exception e)
             {
-                return () => new CompileError(new string[] { e.Message });
+                return () => new Value(new CompileError(new string[] { e.Message }));
             }
             
 
@@ -261,7 +262,7 @@ namespace Diamond.Storage.Formulas
                     errors.Add(result.Errors[e].ErrorText);
                 }
 
-                return () => new CompileError(errors);
+                return () => new Value(new CompileError(errors));
             }
 
             var assembly = result.CompiledAssembly;

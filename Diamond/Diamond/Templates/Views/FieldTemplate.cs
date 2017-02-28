@@ -7,21 +7,21 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Diamond.Templates.Tables
+namespace Diamond.Templates.Views
 {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using Diamond.Storage;
+    using Diamond.Storage.Views;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class CellTemplate : CellTemplateBase
+    public partial class FieldTemplate : FieldTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,228 +29,98 @@ namespace Diamond.Templates.Tables
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n\r\n");
+            this.Write("\r\n");
             
-            #line 9 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
- switch(Cell.DataType)
-   { 
-     case CellDataType.Empty:
+            #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+
+  switch(Field.Descriptor.ViewType)
+  {
+     case ViewTypes.Link:
 	   
             
             #line default
             #line hidden
-            this.Write("<td class=\"td-cell td-cell-empty td-");
             
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("-");
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new LinkTemplate(Field)).TransformText()));
             
             #line default
             #line hidden
-            this.Write("\" table-row=\"");
             
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("\" table-col=\"");
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
-            
-            #line default
-            #line hidden
-            this.Write("\">-</td>");
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
 
-	   break;
-     case CellDataType.String:
+       break;
+     case ViewTypes.Options:
+       break;
+     case ViewTypes.Currency:
 	   
             
             #line default
             #line hidden
-            this.Write("<td class=\"td-cell td-cell-string td-");
             
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("-");
-            
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new CurrencyTemplate(Field)).TransformText()));
             
             #line default
             #line hidden
-            this.Write("\" table-row=\"");
             
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("\" table-col=\"");
-            
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
-            
-            #line default
-            #line hidden
-            this.Write("\">");
-            
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(Cell.GetString())));
-            
-            #line default
-            #line hidden
-            this.Write("</td>");
-            
-            #line 15 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
 
-	   break;
-     case CellDataType.Decimal:
+       break;
+     case ViewTypes.Number:
 	   
             
             #line default
             #line hidden
-            this.Write("<td class=\"td-cell td-cell-decimal td-");
             
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("-");
-            
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new NumberTemplate(Field)).TransformText()));
             
             #line default
             #line hidden
-            this.Write("\" table-row=\"");
             
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("\" table-col=\"");
-            
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
-            
-            #line default
-            #line hidden
-            this.Write("\">");
-            
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Cell.GetDecimal()));
-            
-            #line default
-            #line hidden
-            this.Write("</td>");
-            
-            #line 18 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
 
-	   break;
-     case CellDataType.Formula:
+       break;
+     case ViewTypes.Text:
+       break;
+	 case ViewTypes.InputText:
 	   
             
             #line default
             #line hidden
-            this.Write("<td class=\"td-cell td-cell-formula td-");
             
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("-");
-            
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new InputTextTemplate(Field)).TransformText()));
             
             #line default
             #line hidden
-            this.Write("\" table-row=\"");
             
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("\" table-col=\"");
-            
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
-            
-            #line default
-            #line hidden
-            this.Write("\"><i class=\"fa fa-calculator\" aria-hidden=\"true\"></i>&nbsp;");
-            
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(RunFormula(Cell.GetFormula().Content))));
-            
-            #line default
-            #line hidden
-            this.Write("</td>");
-            
-            #line 21 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
 
 	   break;
-	 default:
+     case ViewTypes.Heading:
 	   
             
             #line default
             #line hidden
-            this.Write("<td class=\"td-cell td-cell-unknown td-");
             
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("-");
-            
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
+            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new HeadingTemplate(Field)).TransformText()));
             
             #line default
             #line hidden
-            this.Write("\" table-row=\"");
             
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Row));
-            
-            #line default
-            #line hidden
-            this.Write("\" table-col=\"");
-            
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Column));
-            
-            #line default
-            #line hidden
-            this.Write("\">(Unknown Cell Data Type)</td>");
-            
-            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\CellTemplate.tt"
+            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
 
-	   break;
-   }
- 
+       break;
+     default:
+       break;
+  }
+
             
             #line default
             #line hidden
-            this.Write("\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -262,7 +132,7 @@ namespace Diamond.Templates.Tables
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class CellTemplateBase
+    public class FieldTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -93,14 +93,17 @@
     <Compile Include="Views\IViewField.cs" />
     <Compile Include="Views\View.cs" />
     <Compile Include="Views\ViewEntry.cs" />
+    <Compile Include="Views\ViewHeading.cs" />
+    <Compile Include="Views\ViewInputText.cs" />
     <Compile Include="Views\ViewLink.cs" />
-    <Compile Include="Views\ViewTemplate.cs" />
+    <Compile Include="Views\ViewDescriptor.cs" />
     <Compile Include="Views\ViewCurrency.cs" />
-    <Compile Include="Views\ViewTemplateEntry.cs" />
-    <Compile Include="Views\ViewMethodSource.cs" />
+    <Compile Include="Views\ViewDescriptorEntry.cs" />
+    <Compile Include="Views\ViewDescriptorMethodSource.cs" />
     <Compile Include="Views\ViewNumber.cs" />
-    <Compile Include="Views\ViewOptions.cs" />
+    <Compile Include="Views\ViewInputOptions.cs" />
     <Compile Include="Views\ViewText.cs" />
+    <Compile Include="Views\ViewTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

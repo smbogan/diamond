@@ -9,7 +9,7 @@ using Sprache;
 
 namespace Diamond.Storage.Views
 {
-    public class ViewTemplate : IEnumerable<ViewTemplateEntry>
+    public class ViewDescriptor : IEnumerable<ViewDescriptorEntry>
     {
 
 
@@ -21,16 +21,16 @@ namespace Diamond.Storage.Views
             from trailing in Parse.WhiteSpace.Many()
             select string.Concat(content);
 
-        private static Parser<ViewTemplateEntry> Entry =
+        private static Parser<ViewDescriptorEntry> Entry =
             from name in DoubleString
             from x in Parse.Char(':').Once()
             from w in Parse.WhiteSpace.Many()
             from formula in Parse.AnyChar.Many().End().Text()
-            select new ViewTemplateEntry(name, formula);
+            select new ViewDescriptorEntry(name, formula);
 
-        private List<ViewTemplateEntry> Entries { get; set; } = new List<ViewTemplateEntry>();
+        private List<ViewDescriptorEntry> Entries { get; set; } = new List<ViewDescriptorEntry>();
 
-        public ViewTemplate(Stream stream)
+        public ViewDescriptor(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -50,7 +50,7 @@ namespace Diamond.Storage.Views
             }
         }
 
-        public IEnumerator<ViewTemplateEntry> GetEnumerator()
+        public IEnumerator<ViewDescriptorEntry> GetEnumerator()
         {
             foreach(var ve in Entries)
             {

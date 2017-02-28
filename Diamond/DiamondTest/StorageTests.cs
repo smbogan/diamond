@@ -46,7 +46,6 @@ namespace DiamondTest
 
                 table[0, 0].SetString("Revenue");
                 table[0, 1].SetDecimal(10.5m);
-                table[0, 2].SetInteger(55);
                 table[0, 3].SetFormula(new Formula());
 
                 using (var ms = new MemoryStream())

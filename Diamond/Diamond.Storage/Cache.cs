@@ -12,7 +12,7 @@ namespace Diamond.Storage
     {
         private Dictionary<ResourceIdentifier, Table> Tables = new Dictionary<ResourceIdentifier, Table>();
 
-        private Dictionary<ResourceIdentifier, ViewTemplate> ViewTemplates = new Dictionary<ResourceIdentifier, ViewTemplate>();
+        private Dictionary<ResourceIdentifier, ViewDescriptor> ViewTemplates = new Dictionary<ResourceIdentifier, ViewDescriptor>();
 
         private Dictionary<ResourceIdentifier, View> Views = new Dictionary<ResourceIdentifier, View>();
 
@@ -23,9 +23,9 @@ namespace Diamond.Storage
             Repository = repository;
         }
 
-        public ViewTemplate GetViewTemplate(ResourceIdentifier identifier)
+        public ViewDescriptor GetViewDescriptor(ResourceIdentifier identifier)
         {
-            ViewTemplate result;
+            ViewDescriptor result;
 
             if(ViewTemplates.TryGetValue(identifier, out result))
             {
@@ -34,7 +34,7 @@ namespace Diamond.Storage
 
             using (var stream = Repository.ReadFile(identifier))
             {
-                result = new ViewTemplate(stream);
+                result = new ViewDescriptor(stream);
 
                 ViewTemplates[identifier] = result;
             }
@@ -92,6 +92,23 @@ namespace Diamond.Storage
             using (MemoryStream ms = new MemoryStream())
             {
                 result.Write(ms);
+                ms.Position = 0;
+                Repository.WriteFile(identifier, ms);
+            }
+        }
+
+        public void SaveView(ResourceIdentifier identifier)
+        {
+            View view;
+
+            if(!Views.TryGetValue(identifier, out view))
+            {
+                return; //nothing to save
+            }
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                view.Write(ms);
                 ms.Position = 0;
                 Repository.WriteFile(identifier, ms);
             }

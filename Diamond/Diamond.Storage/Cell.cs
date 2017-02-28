@@ -37,12 +37,6 @@ namespace Diamond.Storage
             DataType = CellDataType.Decimal;
         }
 
-        public Cell(int value)
-        {
-            content = value.ToString();
-            DataType = CellDataType.Integer;
-        }
-
         public Cell(Formula formula)
         {
             content = formula.ToString();
@@ -71,17 +65,6 @@ namespace Diamond.Storage
             DataType = CellDataType.Decimal;
         }
 
-        public int GetInteger()
-        {
-            return int.Parse(content);
-        }
-
-        public void SetInteger(int value)
-        {
-            content = value.ToString();
-            DataType = CellDataType.Integer;
-        }
-
         public void SetString(string value)
         {
             content = value;
@@ -100,82 +83,102 @@ namespace Diamond.Storage
 
         public static Cell Parse(string value)
         {
-            int leftBracketCount = 0;
 
-            for(int i = 0; i < value.Length; i++)
-            {
-                if(value[i] == '[')
-                {
-                    leftBracketCount++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            string v = value.Substring(leftBracketCount);
-            v = v.Substring(0, v.Length - leftBracketCount);
-
-            if(v.Length == 0)
-            {
+            if (string.IsNullOrEmpty(value))
                 return new Cell();
-            }
-
-            if(v[0] == '$')
-            {
-                return new Cell(decimal.Parse(v.Substring(1)));
-            }
-
-            if(v[0] == '#')
-            {
-                return new Cell(int.Parse(v.Substring(1)));
-            }
-
-            if(v[0] == ':')
-            {
-                return new Cell(v.Substring(1));
-            }
-
-            if(v[0] == '=')
-            {
-                return new Cell(new Formula(v.Substring(1)));
-            }
 
             decimal decimalValue;
 
-            if(decimal.TryParse(v, out decimalValue))
+            if(decimal.TryParse(value, out decimalValue))
             {
                 return new Cell(decimalValue);
             }
 
-            int intValue;
-
-            if(int.TryParse(v, out intValue))
+            if(value.StartsWith("="))
             {
-                return new Cell(intValue);
+                return new Cell(new Formula(value));
             }
 
-            return new Cell(v);
+            return new Cell(value);
+
+            //int leftBracketCount = 0;
+
+            //for(int i = 0; i < value.Length; i++)
+            //{
+            //    if(value[i] == '[')
+            //    {
+            //        leftBracketCount++;
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+            //}
+
+            //string v = value.Substring(leftBracketCount);
+            //v = v.Substring(0, v.Length - leftBracketCount);
+
+            //if(v.Length == 0)
+            //{
+            //    return new Cell();
+            //}
+
+            //if(v[0] == '$')
+            //{
+            //    return new Cell(decimal.Parse(v.Substring(1)));
+            //}
+
+            //if(v[0] == '#')
+            //{
+            //    return new Cell(int.Parse(v.Substring(1)));
+            //}
+
+            //if(v[0] == ':')
+            //{
+            //    return new Cell(v.Substring(1));
+            //}
+
+            //if(v[0] == '=')
+            //{
+            //    return new Cell(new Formula(v.Substring(1)));
+            //}
+
+            //decimal decimalValue;
+
+            //if(decimal.TryParse(v, out decimalValue))
+            //{
+            //    return new Cell(decimalValue);
+            //}
+
+            //int intValue;
+
+            //if(int.TryParse(v, out intValue))
+            //{
+            //    return new Cell(intValue);
+            //}
+
+            //return new Cell(v);
         }
 
         public override string ToString()
         {
-            switch(DataType)
-            {
-                case CellDataType.Decimal:
-                    return "$" + content;
-                case CellDataType.Empty:
-                    return "";
-                case CellDataType.Formula:
-                    return "=" + content;
-                case CellDataType.Integer:
-                    return "#" + content;
-                case CellDataType.String:
-                    return ":" + content;
-                default:
-                    throw new Exception("Unknown data type.");
-            }
+            return content;
+
+            //switch(DataType)
+            //{
+            //    case CellDataType.Decimal:
+            //        return "$" + content;
+            //    case CellDataType.Empty:
+            //        return "";
+            //    case CellDataType.Formula:
+            //        return "=" + content;
+            //    case CellDataType.Integer:
+            //        return "#" + content;
+            //    case CellDataType.String:
+            //        return ":" + content;
+            //    default:
+            //        throw new Exception("Unknown data type.");
+            //}
         }
     }
 }

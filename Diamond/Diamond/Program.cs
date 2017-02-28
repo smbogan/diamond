@@ -35,7 +35,10 @@ namespace Diamond
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Idle += (s, e) => CefSharp.Cef.DoMessageLoopWork();
-            Application.Run(new DiamondForm(Controller));
+
+            new DiamondForm(Controller, "www://root/main.view").Show();
+
+            Application.Run();
 
             CefSharp.Cef.Shutdown();
         }

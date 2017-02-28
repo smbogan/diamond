@@ -11,7 +11,7 @@ namespace Diamond.Storage.Views
     {
         public string Name { get; private set; }
 
-        public Cell Value { get; private set; }
+        public Cell Value { get; set; }
 
         public ViewEntry(string name, Cell value)
         {

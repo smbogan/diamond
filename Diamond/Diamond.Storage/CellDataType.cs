@@ -11,7 +11,6 @@ namespace Diamond.Storage
         Empty,
         String,
         Decimal,
-        Integer,
         Formula
     }
 }

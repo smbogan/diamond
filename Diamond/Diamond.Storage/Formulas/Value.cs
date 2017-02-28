@@ -12,7 +12,6 @@ namespace Diamond.Storage.Formulas
         public enum ValueType
         {
             StringValue,
-            NumberValue,
             DecimalValue,
             MissingValue,
             CompileError
@@ -20,7 +19,6 @@ namespace Diamond.Storage.Formulas
 
         public ValueType TypeOfValue { get; private set; }
         public string StringValue { get; private set; }
-        public long NumberValue { get; private set; }
         public decimal DecimalValue { get; private set; }
         public CompileError CompileError { get; private set; }
         public MissingVariables MissingVariables { get; private set; }
@@ -30,7 +28,6 @@ namespace Diamond.Storage.Formulas
         {
             TypeOfValue = value.TypeOfValue;
             StringValue = value.StringValue;
-            NumberValue = value.NumberValue;
             DecimalValue = value.DecimalValue;
             MissingVariables = value.MissingVariables;
             CompileError = value.CompileError;
@@ -46,12 +43,6 @@ namespace Diamond.Storage.Formulas
         {
             TypeOfValue = ValueType.StringValue;
             StringValue = value;
-        }
-
-        public Value(long number)
-        {
-            NumberValue = number;
-            TypeOfValue = ValueType.NumberValue;
         }
 
         public Value(decimal value)
@@ -74,8 +65,6 @@ namespace Diamond.Storage.Formulas
                     return DecimalValue.ToString(CultureInfo.InvariantCulture);
                 case ValueType.MissingValue:
                     return MissingVariables.ToString();
-                case ValueType.NumberValue:
-                    return NumberValue.ToString(CultureInfo.InvariantCulture);
                 case ValueType.StringValue:
                     return StringValue;
                 case ValueType.CompileError:
@@ -125,24 +114,6 @@ namespace Diamond.Storage.Formulas
                 return new Value(a.DecimalValue + b.DecimalValue);
             }
 
-            if(a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.NumberValue + b.NumberValue);
-            }
-
-            if(a.TypeOfValue == ValueType.DecimalValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.DecimalValue + b.NumberValue);
-            }
-
-            if(a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.DecimalValue)
-            {
-                return new Value(a.NumberValue + b.DecimalValue);
-            }
-
             return new Value(a.ToString() + b.ToString());
         }
 
@@ -184,24 +155,6 @@ namespace Diamond.Storage.Formulas
                 && b.TypeOfValue == ValueType.DecimalValue)
             {
                 return new Value(a.DecimalValue - b.DecimalValue);
-            }
-
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.NumberValue - b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.DecimalValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.DecimalValue - b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.DecimalValue)
-            {
-                return new Value(a.NumberValue - b.DecimalValue);
             }
 
             throw new InvalidOperationException("Cannot subtract values that are not numbers.");
@@ -247,24 +200,6 @@ namespace Diamond.Storage.Formulas
                 return new Value(a.DecimalValue * b.DecimalValue);
             }
 
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.NumberValue * b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.DecimalValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.DecimalValue * b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.DecimalValue)
-            {
-                return new Value(a.NumberValue * b.DecimalValue);
-            }
-
             throw new InvalidOperationException("Cannot multiply values that are not numbers.");
         }
 
@@ -306,24 +241,6 @@ namespace Diamond.Storage.Formulas
                 && b.TypeOfValue == ValueType.DecimalValue)
             {
                 return new Value(a.DecimalValue / b.DecimalValue);
-            }
-
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.NumberValue / b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.DecimalValue
-                && b.TypeOfValue == ValueType.NumberValue)
-            {
-                return new Value(a.DecimalValue / b.NumberValue);
-            }
-
-            if (a.TypeOfValue == ValueType.NumberValue
-                && b.TypeOfValue == ValueType.DecimalValue)
-            {
-                return new Value(a.NumberValue / b.DecimalValue);
             }
 
             throw new InvalidOperationException("Cannot divide values that are not numbers.");

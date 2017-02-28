@@ -8,9 +8,32 @@ namespace Diamond.Storage.Views
 {
     public class ViewCurrency : IViewField
     {
-        public ViewCurrency()
-        {
+        private string Formula { get; set; }
 
+        public ViewCurrency(string formula)
+        {
+            Formula = formula;
+        }
+
+        public bool ProvidesEntry
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public ViewTypes ViewType
+        {
+            get
+            {
+                return ViewTypes.Currency;
+            }
+        }
+
+        public Formula GetEntry()
+        {
+            return new Formula(Formula);
         }
     }
 }

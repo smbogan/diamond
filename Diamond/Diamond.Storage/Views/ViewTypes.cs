@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace Diamond.Storage.Views
 {
-    public interface IViewField
+    public enum ViewTypes
     {
-        ViewTypes ViewType { get; }
-        bool ProvidesEntry { get; }
-        Formula GetEntry();
+        Link,
+        Options,
+        Currency,
+        Number,
+        Text,
+        Heading,
+        InputText
     }
 }
