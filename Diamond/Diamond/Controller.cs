@@ -18,10 +18,30 @@ namespace Diamond
     {
         public Cache Cache { get; private set; }
 
+        Dictionary<ResourceIdentifier, TemplatedView> Templates { get; set; } = new Dictionary<ResourceIdentifier, TemplatedView>();
+
         public Controller()
         {
             Repository repo = new Repository("C:\\DiamondData", "Shaun Bogan", "smbogan@gmail.com");
             Cache = new Cache(repo);
+        }
+
+        private TemplatedView GetTemplate(ResourceIdentifier viewIdentifier)
+        {
+            TemplatedView result;
+            
+            if(Templates.TryGetValue(viewIdentifier, out result))
+            {
+                return result;
+            }
+
+            var view = Cache.GetView(viewIdentifier);
+
+            result = new Diamond.TemplatedView(this, view);
+
+            Templates[viewIdentifier] = result;
+
+            return result;
         }
 
         public string GetRawTableCell(string path, int row, int col)
@@ -48,15 +68,15 @@ namespace Diamond
             return new CellTemplate(this, table, table[row, col], row, col).TransformText();
         }
 
-        public string GetRenderedViewEntry(string path, string fieldName)
+        public string GetRenderedViewEntry(string path, string variableName)
         {
-            var view = Cache.GetView(new ResourceIdentifier(path));
+            TemplatedView templatedView = GetTemplate(new ResourceIdentifier(path));
 
-            TemplatedView templatedView = new TemplatedView(this, view);
+            templatedView.ClearEvaluations();
 
-            var field = templatedView.Where(f => f.Name == fieldName).FirstOrDefault();
+            var field = templatedView.Where(f => f.VariableName == variableName).FirstOrDefault();
 
-            return new InputTextTemplate(field).TransformText();
+            return new FieldTemplate(field).TransformText();
 
             //return Html.Escape(field.ToString());
         }
@@ -70,18 +90,41 @@ namespace Diamond
 
         public void UpdateViewEntryValue(string path, string fieldName, string value)
         {
-            var view = Cache.GetView(new ResourceIdentifier(path));
+            var templateView = GetTemplate(new ResourceIdentifier(path));
+
+            var view = templateView.View;
 
             var field = view.Where(f => f.Name == fieldName).FirstOrDefault();
 
             if(field == null)
             {
-                view.Add(new ViewEntry(fieldName, Cell.Parse(value)));
+                if (!string.IsNullOrEmpty(value))
+                {
+                    view.Add(new ViewEntry(fieldName, Cell.Parse(value)));
+                    templateView.UpdateFields();
+                }
             }
             else
             {
-                field.Value = Cell.Parse(value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    view.Remove((e) => e.Name == fieldName);
+                    templateView.UpdateFields();
+                }
+                else
+                {
+                    field.Value = Cell.Parse(value);
+                    templateView.UpdateFields();
+                }
+                
             }
+        }
+
+        public string[] GetDependents(string path, string variable)
+        {
+            TemplatedView templatedView = GetTemplate(new ResourceIdentifier(path));
+
+            return templatedView.Graph.GetDependents(variable).ToArray();
         }
 
         System.Text.RegularExpressions.Regex pageTemplate =
@@ -104,9 +147,7 @@ namespace Diamond
                     break;
                 case ResourceType.View:
                     {
-                        var view = Cache.GetView(identifier);
-
-                        TemplatedView templatedView = new TemplatedView(this, view);
+                        TemplatedView templatedView = GetTemplate(identifier);
 
                         var template = new ViewTemplate(templatedView, identifier.Identifier);
 

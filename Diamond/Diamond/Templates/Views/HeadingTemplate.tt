@@ -5,4 +5,4 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Diamond.Storage.Views" #>
 
-<tr class="info"><td colspan="2"><b><#= Field.ToString() #></b></td></tr>
+<tr class="info" variable-name="<#= Field.VariableName #>"><td colspan="2"><b><#= Field.ToString() #></b></td></tr>

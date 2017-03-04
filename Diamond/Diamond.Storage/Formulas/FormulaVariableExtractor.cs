@@ -95,7 +95,7 @@ namespace Diamond.Storage.Formulas
         //static readonly Parser<CodeBinaryOperatorType> Power = Operator("^", CodeBinaryOperatorType.);
 
         static readonly Parser<string[]> Operand =
-            from operand in ReplacementDecimalVariable.Or(ReplacementStringVariable).Or(Decimal).Or(DoubleString).Or(SingleString).Or(Parse.Ref(() => Call))
+            from operand in ReplacementDecimalVariable.Or(ReplacementStringVariable).Or(Decimal).Or(DoubleString).Or(SingleString).Or(Parse.Ref(() => Call)).Or(Parse.Ref(() => Parenth))
             select operand;
 
         static readonly Parser<string[]> ExpressionLevel2 = Parse.ChainOperator(Multiply.Or(Divide).Or(Modulo), Operand, (op, l, r) => l.Concat(r).ToArray());
@@ -121,13 +121,27 @@ namespace Diamond.Storage.Formulas
             from rparen in Parse.Char(')').Once()
             select parameters.GetOrDefault()?.ToArray() ?? new string[] { };
 
+        private static Parser<string[]> Parenth =
+            from lparen in Parse.Char('(')
+            from expr in Expression
+            from rparen in Parse.Char(')')
+            select expr;
+
         private static Parser<string[]> Formula =
+            from equal in Parse.Char('=').Optional()
             from expr in Expression.End()
             select expr;
 
         public static string[] GetVariables(string formula)
         {
-            return Formula.Parse(formula);
+            try
+            {
+                return Formula.Parse(formula);
+            }
+            catch
+            {
+                return new string[] { };
+            }
         }
     }
 }

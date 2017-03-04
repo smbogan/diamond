@@ -16,7 +16,7 @@ namespace Diamond
 
         ViewDescriptor Descriptor { get; set; }
 
-        View View { get; set; }
+        public View View { get; set; }
 
         public Variables Variables { get; private set; }
 
@@ -24,22 +24,26 @@ namespace Diamond
 
         Dictionary<string, Value> evaluations = new Dictionary<string, Value>();
 
+        public ViewGraph Graph { get; private set; }
+
+        private CompilerFactoryCache ViewFactory { get; set; }
+
+        private CompilerFactoryCache CellFactory { get; set; }
+
         public TemplatedView(Controller controller, View view)
         {
             Controller = controller;
 
             View = view;
 
-            var descriptor = controller.Cache.GetViewDescriptor(new Storage.ResourceIdentifier(view.Descriptor));
+            Descriptor = controller.Cache.GetViewDescriptor(new Storage.ResourceIdentifier(view.Descriptor));
 
             Variables = new Diamond.Variables((key) =>
             {
-                //var rawKey = key;
-
-                key = new string(key.Where(c =>
-                (c >= 'a' && c <= 'z')
-                || (c >= 'A' && c <= 'Z')
-                || (c >= '0' && c <= '9')).ToArray());
+                //key = new string(key.Where(c =>
+                //(c >= 'a' && c <= 'z')
+                //|| (c >= 'A' && c <= 'Z')
+                //|| (c >= '0' && c <= '9')).ToArray());
 
                 Value result;
 
@@ -48,10 +52,7 @@ namespace Diamond
                     return result;
                 }
 
-                var field = fields.Where(f => (new string(f.Name.Where(c =>
-                  (c >= 'a' && c <= 'z')
-                  || (c >= 'A' && c <= 'Z')
-                  || (c >= '0' && c <= '9')).ToArray())) == key).FirstOrDefault();
+                var field = fields.Where(f => f.VariableName == key).FirstOrDefault();
 
                 if(field != null)
                 {
@@ -59,7 +60,8 @@ namespace Diamond
                     {
                         var descriptorFormula = field.Descriptor.GetEntry();
 
-                        result = new FormulaCompiler(Variables, new ViewMethodSource(Controller)).Compile(descriptorFormula.Content)() as Value;
+                        //result = new FormulaCompiler(Variables, new ViewMethodSource(Controller)).Compile(descriptorFormula.Content)() as Value;
+                        result = CellFactory.Run<Value>(descriptorFormula.Content);
                     }
                     else
                     {
@@ -80,7 +82,8 @@ namespace Diamond
                                 result = new Value(cell.GetString());
                                 break;
                             case Storage.CellDataType.Formula:
-                                result = new FormulaCompiler(Variables, new ViewMethodSource(Controller)).Compile(cell.GetFormula().Content)() as Value;
+                                //result = new FormulaCompiler(Variables, new ViewMethodSource(Controller)).Compile(cell.GetFormula().Content)() as Value;
+                                result = CellFactory.Run<Value>(cell.GetFormula().Content);
                                 break;
                         }
                     }
@@ -96,6 +99,8 @@ namespace Diamond
                 return result;
             });
 
+            CellFactory = new Diamond.CompilerFactoryCache(Variables, new ViewMethodSource(Controller));
+
             Dictionary<string, ViewEntry> entries = new Dictionary<string, ViewEntry>();
 
             foreach(var e in view)
@@ -108,9 +113,11 @@ namespace Diamond
                 return new Value(new MissingVariables(key));
             });
 
-            foreach(var d in descriptor)
+            ViewFactory = new Diamond.CompilerFactoryCache(viewFactoryVariables, new Diamond.Storage.Views.ViewDescriptorMethodSource());
+
+            foreach(var d in Descriptor)
             {
-                var f = ViewFactory.Run(d.Formula, viewFactoryVariables);
+                var f = ViewFactory.Run<IViewField>(d.Formula);
 
                 ViewEntry correspondingEntry;
 
@@ -119,7 +126,37 @@ namespace Diamond
                 fields.Add(new ViewField(d.Name, f, correspondingEntry, Variables));
             }
 
+            Graph = new Diamond.ViewGraph(this);            
+        }
 
+        public void UpdateFields()
+        {
+            Dictionary<string, ViewEntry> entries = new Dictionary<string, ViewEntry>();
+
+            foreach (var e in View)
+            {
+                entries[e.Name] = e;
+            }
+
+            fields.Clear();
+
+            foreach (var d in Descriptor)
+            {
+                var f = ViewFactory.Run<IViewField>(d.Formula);
+
+                ViewEntry correspondingEntry;
+
+                entries.TryGetValue(d.Name, out correspondingEntry);
+
+                fields.Add(new ViewField(d.Name, f, correspondingEntry, Variables));
+            }
+
+            Graph = new Diamond.ViewGraph(this);
+        }
+
+        public void RegenerateGraph()
+        {
+            Graph = new Diamond.ViewGraph(this);
         }
 
         public IEnumerator<ViewField> GetEnumerator()
@@ -130,6 +167,11 @@ namespace Diamond
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<ViewField>)fields).GetEnumerator();
+        }
+
+        public void ClearEvaluations()
+        {
+            evaluations.Clear();
         }
     }
 }

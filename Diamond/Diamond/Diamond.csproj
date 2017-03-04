@@ -137,7 +137,7 @@
       <DependentUpon>NumberTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Views\NumberTemplate.Data.cs" />
-    <Compile Include="ViewFactory.cs" />
+    <Compile Include="CompilerFactoryCache.cs" />
     <Compile Include="Templates\Views\ViewTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,6 +146,7 @@
     <Compile Include="Templates\Views\ViewTemplate.Data.cs" />
     <Compile Include="Variables.cs" />
     <Compile Include="ViewField.cs" />
+    <Compile Include="ViewGraph.cs" />
     <Compile Include="ViewMethodSource.cs" />
     <EmbeddedResource Include="DiamondForm.resx">
       <DependentUpon>DiamondForm.cs</DependentUpon>

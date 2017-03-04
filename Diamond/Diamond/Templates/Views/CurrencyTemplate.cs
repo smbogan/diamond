@@ -28,7 +28,14 @@ namespace Diamond.Templates.Views
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<tr><td><b>");
+            this.Write("\r\n<tr variable-name=\"");
+            
+            #line 7 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\CurrencyTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Field.VariableName));
+            
+            #line default
+            #line hidden
+            this.Write("\"><td><b>");
             
             #line 7 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\CurrencyTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(Field.Name)));

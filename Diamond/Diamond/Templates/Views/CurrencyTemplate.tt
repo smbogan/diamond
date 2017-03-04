@@ -4,4 +4,4 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
-<tr><td><b><#= Html.Escape(Field.Name) #></b></td><td>$<#= Field.ToString() #></td></tr>
+<tr variable-name="<#= Field.VariableName #>"><td><b><#= Html.Escape(Field.Name) #></b></td><td>$<#= Field.ToString() #></td></tr>

@@ -29,7 +29,14 @@ namespace Diamond.Templates.Views
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<tr class=\"info\"><td colspan=\"2\"><b>");
+            this.Write("\r\n<tr class=\"info\" variable-name=\"");
+            
+            #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\HeadingTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Field.VariableName));
+            
+            #line default
+            #line hidden
+            this.Write("\"><td colspan=\"2\"><b>");
             
             #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\HeadingTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Field.ToString()));

@@ -21,20 +21,30 @@ $(function () {
         var editingTD = $(".editing");
 
         var fieldName = editingTD.attr('field-name');
+        var variableName = editingTD.parent().attr('variable-name');
 
         var input = $(editingTD.find("input"));
 
+        var reloadRows = [];
+
         if (save) {
             window.controller.updateViewEntryValue(path, fieldName, input.val());
+
+            reloadRows = window.controller.getDependents(path, fieldName);
         }
 
         editingTD.off("blur");
         editingTD.empty();
         editingTD.removeClass("editing");
 
-        var newRow = $(window.controller.getRenderedViewEntry(path, fieldName));
+        var newRow = $(window.controller.getRenderedViewEntry(path, variableName));
 
         editingTD.parent().replaceWith(newRow);
+
+        $.each(reloadRows, function (index, value) {
+            console.log(value);
+            $('tr[variable-name="' + value + '"]').replaceWith($(window.controller.getRenderedViewEntry(path, value)));
+        });
     }
 
     var activateInputText = function (target) {

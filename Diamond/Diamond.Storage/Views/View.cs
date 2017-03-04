@@ -35,6 +35,11 @@ namespace Diamond.Storage.Views
             Entries.Add(entry);
         }
 
+        public void Remove(Predicate<ViewEntry> predicate)
+        {
+            Entries.RemoveAll(predicate);
+        }
+
         public View(Stream stream)
         {
             using (var sr = new StreamReader(stream, Encoding.UTF8))

@@ -16,6 +16,7 @@ namespace Diamond.Storage
 
         private Dictionary<ResourceIdentifier, View> Views = new Dictionary<ResourceIdentifier, View>();
 
+
         private Repository Repository { get; set; }
 
         public Cache(Repository repository)

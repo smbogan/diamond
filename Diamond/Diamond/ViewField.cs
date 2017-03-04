@@ -1,4 +1,5 @@
 ﻿using Diamond.Storage;
+using Diamond.Storage.Formulas;
 using Diamond.Storage.Views;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,51 @@ namespace Diamond
     {
         public string Name { get; private set; }
 
+        public string VariableName { get; private set; }
+
         public IViewField Descriptor { get; private set; }
 
         public ViewEntry Entry { get; set; }
 
         Variables Variables { get; set; }
 
+        public IEnumerable<string> DependentVariables
+        {
+            get
+            {
+                if(Descriptor.ProvidesEntry)
+                {
+                    foreach(var x in FormulaVariableExtractor.GetVariables(Descriptor.GetEntry().Content))
+                    {
+                        yield return x;
+                    }
+                }
+                else if(Entry == null || Entry.Value == null)
+                {
+                    yield break;
+                }
+                else if(Entry.Value.DataType == CellDataType.Formula)
+                {
+                    foreach (var x in FormulaVariableExtractor.GetVariables(Entry.Value.GetFormula().Content))
+                    {
+                        yield return x;
+                    }
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+        }
+
         public ViewField(string name, IViewField descriptor, ViewEntry entry, Variables variables)
         {
             Name = name;
+            VariableName = new string(name.Where(c =>
+                (c >= 'a' && c <= 'z')
+                || (c >= 'A' && c <= 'Z')
+                || (c >= '0' && c <= '9')).ToArray());
+
             Descriptor = descriptor;
             Entry = entry;
             Variables = variables;
@@ -38,7 +75,7 @@ namespace Diamond
                 return Entry.Value.ToString();
             }
 
-            var value = Variables[Name];
+            var value = Variables[VariableName];
 
             return value.ToString();
         }
