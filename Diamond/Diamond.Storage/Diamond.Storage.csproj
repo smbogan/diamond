@@ -102,6 +102,7 @@
     <Compile Include="Views\ViewDescriptorMethodSource.cs" />
     <Compile Include="Views\ViewNumber.cs" />
     <Compile Include="Views\ViewInputOptions.cs" />
+    <Compile Include="Views\ViewTableLink.cs" />
     <Compile Include="Views\ViewText.cs" />
     <Compile Include="Views\ViewTypes.cs" />
   </ItemGroup>

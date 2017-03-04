@@ -13,6 +13,8 @@ namespace Diamond.Storage.Formulas
         {
             StringValue,
             DecimalValue,
+            TableValue,
+            ViewValue,
             MissingValue,
             CompileError
         }
@@ -22,6 +24,7 @@ namespace Diamond.Storage.Formulas
         public decimal DecimalValue { get; private set; }
         public CompileError CompileError { get; private set; }
         public MissingVariables MissingVariables { get; private set; }
+        public Table TableValue { get; private set; }
 
 
         public Value(Value value)
@@ -29,6 +32,7 @@ namespace Diamond.Storage.Formulas
             TypeOfValue = value.TypeOfValue;
             StringValue = value.StringValue;
             DecimalValue = value.DecimalValue;
+
             MissingVariables = value.MissingVariables;
             CompileError = value.CompileError;
         }

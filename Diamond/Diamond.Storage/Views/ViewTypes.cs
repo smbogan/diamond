@@ -14,6 +14,7 @@ namespace Diamond.Storage.Views
         Number,
         Text,
         Heading,
-        InputText
+        InputText,
+        TableLink
     }
 }
