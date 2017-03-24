@@ -85,19 +85,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ResourceIdentifierTests.cs" />
     <Compile Include="StorageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FormulaTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Diamond.Storage\Diamond.Storage.csproj">
-      <Project>{b0e674fd-b179-4290-8d34-1f9d074b281a}</Project>
-      <Name>Diamond.Storage</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Diamond\Diamond.csproj">
+      <Project>{f5adc49e-ba1d-42c0-93d4-6f10b6a672eb}</Project>
+      <Name>Diamond</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

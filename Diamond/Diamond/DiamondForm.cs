@@ -1,5 +1,5 @@
 ﻿using CefSharp;
-using Diamond.Storage.Formulas;
+using Diamond.Formulas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

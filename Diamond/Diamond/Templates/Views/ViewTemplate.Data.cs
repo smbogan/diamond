@@ -1,4 +1,4 @@
-﻿using Diamond.Storage.Views;
+﻿using Diamond.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,11 @@ namespace Diamond.Templates.Views
 
         string Path { get; set; }
 
-        public ViewTemplate(TemplatedView templatedView, string path)
+        Controller Controller { get; set; }
+
+        public ViewTemplate(Controller controller, TemplatedView templatedView, string path)
         {
+            Controller = controller;
             Path = path;
             TemplatedView = templatedView;
         }

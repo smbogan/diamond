@@ -12,14 +12,14 @@ namespace Diamond.Templates.Views
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using Diamond.Storage.Views;
+    using Diamond.Views;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class ViewTemplate : ViewTemplateBase
     {
@@ -39,10 +39,10 @@ namespace Diamond.Templates.Views
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title></title>
 
-    <link href=""bootstrap/css/bootstrap.min.css"" rel=""stylesheet"">
-	<link href=""fontawesome/css/font-awesome.min.css"" rel=""stylesheet"">
-	<link href=""jcontext/jquery.contextMenu.css"" rel=""stylesheet"">
-	<link href=""css/main.css"" rel=""stylesheet"">
+    <link href=""/bootstrap/css/bootstrap.min.css"" rel=""stylesheet"">
+	<link href=""/fontawesome/css/font-awesome.min.css"" rel=""stylesheet"">
+	<link href=""/jcontext/jquery.contextMenu.css"" rel=""stylesheet"">
+	<link href=""/css/main.css"" rel=""stylesheet"">
 
   </head>
   <body>
@@ -50,7 +50,7 @@ namespace Diamond.Templates.Views
 	  <div class=""content"">
 	    <table class=""table table-bordered table-striped view-table"" view-path=""");
             
-            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 26 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(Path)));
             
             #line default
@@ -58,7 +58,7 @@ namespace Diamond.Templates.Views
             this.Write("\">\r\n\t\t  <!--<thead>\r\n\t\t    <tr><th>Key</th><th>Value</th></tr>\r\n\t\t  </thead>-->\r\n" +
                     "\t\t  <tbody>\r\n            ");
             
-            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 31 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
  foreach(var field in TemplatedView)
 	           {
 	     	      
@@ -66,13 +66,13 @@ namespace Diamond.Templates.Views
             #line default
             #line hidden
             
-            #line 33 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new FieldTemplate(field)).TransformText()));
+            #line 33 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture((new FieldTemplate(Controller, field)).TransformText()));
             
             #line default
             #line hidden
             
-            #line 33 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 33 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
 
 	      	   } 
             
@@ -85,14 +85,14 @@ namespace Diamond.Templates.Views
 	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src=""js/jquery-3.1.1.js""></script>
-	<script src=""js/jquery.caret-1.5.2.min.js""></script>
+    <script src=""/js/jquery-3.1.1.js""></script>
+	<script src=""/js/jquery.caret-1.5.2.min.js""></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src=""bootstrap/js/bootstrap.min.js""></script>
-	<script src=""jcontext/jquery.ui.position.min.js""></script>
-	<script src=""jcontext/jquery.contextMenu.min.js""></script>
+    <script src=""/bootstrap/js/bootstrap.min.js""></script>
+	<script src=""/jcontext/jquery.ui.position.min.js""></script>
+	<script src=""/jcontext/jquery.contextMenu.min.js""></script>
 
-	<script src=""js/view.js""></script>
+	<script src=""/js/view.js""></script>
   </body>
 </html>");
             return this.GenerationEnvironment.ToString();

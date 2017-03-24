@@ -1,5 +1,4 @@
 ﻿using CefSharp;
-using Diamond.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;

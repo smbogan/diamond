@@ -1,5 +1,4 @@
-﻿using Diamond.Storage;
-using Diamond.Storage.Views;
+﻿using Diamond.Views;
 using Diamond.Templates;
 using Diamond.Templates.Tables;
 using Diamond.Templates.Views;
@@ -76,9 +75,39 @@ namespace Diamond
 
             var field = templatedView.Where(f => f.VariableName == variableName).FirstOrDefault();
 
-            return new FieldTemplate(field).TransformText();
+            return new FieldTemplate(this, field).TransformText();
 
             //return Html.Escape(field.ToString());
+        }
+
+        public void CreateTable(string viewPath, string variableName, string path)
+        {
+            TemplatedView templatedView = GetTemplate(new Diamond.ResourceIdentifier(viewPath));
+
+            var viewField = templatedView.Where(f => f.VariableName == variableName).First();
+
+            var tableLink = viewField.Descriptor as Views.ViewTableLink;
+
+            var headings = tableLink.Headings;
+
+            var newTable = new Table(headings);
+
+            Cache.SaveTable(new ResourceIdentifier(path), newTable);
+        }
+
+        public void CreateView(string viewPath, string variableName, string path)
+        {
+            TemplatedView templatedView = GetTemplate(new Diamond.ResourceIdentifier(viewPath));
+
+            var viewField = templatedView.Where(f => f.VariableName == variableName).First();
+
+            var viewLink = viewField.Descriptor as Views.ViewViewLink;
+
+            var descriptor = viewLink.Descriptor;
+
+            var newView = new View(descriptor);
+
+            Cache.SaveView(new ResourceIdentifier(path), newView);
         }
 
         public void UpdateTableValue(string path, int row, int col, string value)
@@ -124,7 +153,9 @@ namespace Diamond
         {
             TemplatedView templatedView = GetTemplate(new ResourceIdentifier(path));
 
-            return templatedView.Graph.GetDependents(variable).ToArray();
+            var deps =  templatedView.Graph.GetDependents(variable).ToArray();
+
+            return deps;
         }
 
         System.Text.RegularExpressions.Regex pageTemplate =
@@ -149,7 +180,7 @@ namespace Diamond
                     {
                         TemplatedView templatedView = GetTemplate(identifier);
 
-                        var template = new ViewTemplate(templatedView, identifier.Identifier);
+                        var template = new ViewTemplate(this, templatedView, identifier.Identifier);
 
                         result = template.TransformText();
                     }

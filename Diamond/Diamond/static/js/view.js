@@ -48,6 +48,12 @@ $(function () {
     }
 
     var activateInputText = function (target) {
+        console.log(target);
+
+        if (target.prop("tagName").toLowerCase() != "td") {
+            return;
+        }
+
         var fieldName = target.attr("field-name");
 
         if (!target.is(".editing")) {
@@ -83,5 +89,38 @@ $(function () {
 
     $(".save-view-button").click(function () {
         window.controller.saveView(path);
+    });
+
+    $(".create-table-button").click(function (event) {
+        var tablePath = $(event.target).attr("table-path");
+
+        var variableName = $(event.target).parent().parent().attr("variable-name");
+
+        window.controller.createTable(path, variableName, tablePath);
+
+        window.location.href = tablePath;
+    });
+
+    $(".edit-table-button").click(function (event) {
+        var tablePath = $(event.target).attr("table-path");
+
+        window.location.href = tablePath;
+    });
+
+    ///////
+    $('.view-table').on('click', ".create-view-button", function (event) {
+        var viewPath = $(event.target).attr("view-path");
+
+        var variableName = $(event.target).parent().parent().attr("variable-name");
+
+        window.controller.createView(path, variableName, viewPath);
+
+        window.location.href = viewPath;
+    });
+
+    $('.view-table').on('click', ".edit-view-button", function (event) {
+        var viewPath = $(event.target).attr("view-path");
+
+        window.location.href = viewPath;
     });
 });

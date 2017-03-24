@@ -1,12 +1,11 @@
-﻿using Diamond.Storage.Formulas;
-using Diamond.Storage.Views;
+﻿using Diamond.Formulas;
+using Diamond.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-using Diamond.Storage;
 
 namespace Diamond
 {
@@ -26,7 +25,7 @@ namespace Diamond
 
         public ViewGraph Graph { get; private set; }
 
-        private CompilerFactoryCache ViewFactory { get; set; }
+        private CompilerWithoutVariablesFactoryCache ViewFactory { get; set; }
 
         private CompilerFactoryCache CellFactory { get; set; }
 
@@ -36,7 +35,7 @@ namespace Diamond
 
             View = view;
 
-            Descriptor = controller.Cache.GetViewDescriptor(new Storage.ResourceIdentifier(view.Descriptor));
+            Descriptor = controller.Cache.GetViewDescriptor(new ResourceIdentifier(view.Descriptor));
 
             Variables = new Diamond.Variables((key) =>
             {
@@ -72,16 +71,16 @@ namespace Diamond
 
                         switch (cell.DataType)
                         {
-                            case Storage.CellDataType.Decimal:
+                            case CellDataType.Decimal:
                                 result = new Value(cell.GetDecimal());
                                 break;
-                            case Storage.CellDataType.Empty:
+                            case CellDataType.Empty:
                                 result = new Value("");
                                 break;
-                            case Storage.CellDataType.String:
+                            case CellDataType.String:
                                 result = new Value(cell.GetString());
                                 break;
-                            case Storage.CellDataType.Formula:
+                            case CellDataType.Formula:
                                 //result = new FormulaCompiler(Variables, new ViewMethodSource(Controller)).Compile(cell.GetFormula().Content)() as Value;
                                 result = CellFactory.Run<Value>(cell.GetFormula().Content);
                                 break;
@@ -108,12 +107,12 @@ namespace Diamond
                 entries[e.Name] = e;
             }
 
-            var viewFactoryVariables = new Variables((key) =>
-            {
-                return new Value(new MissingVariables(key));
-            });
+            //var viewFactoryVariables = new Variables((key) =>
+            //{
+            //    return new Value(new MissingVariables(key));
+            //});
 
-            ViewFactory = new Diamond.CompilerFactoryCache(viewFactoryVariables, new Diamond.Storage.Views.ViewDescriptorMethodSource());
+            ViewFactory = new Diamond.CompilerWithoutVariablesFactoryCache(new Diamond.Views.ViewDescriptorMethodSource());
 
             foreach(var d in Descriptor)
             {

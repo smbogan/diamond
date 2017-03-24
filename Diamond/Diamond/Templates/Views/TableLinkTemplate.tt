@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<tr variable-name="<#= Field.VariableName #>"><td><b><#= Html.Escape(Field.Name) #></b></td><td field-name="<#= Html.Escape(Field.Name) #>" class="table-link-field"><# 
+  if(PathExists())
+  {
+    #><i class="fa fa-table" aria-hidden="true"></i>&nbsp;<#= Html.Escape(Field.ToString()) #><button class="btn btn-info edit-table-button" table-path="<#= Html.Escape(Field.ToString()) #>">Edit</button><#
+  }
+  else
+  {
+    #><i class="fa fa-table" style="color: red;" aria-hidden="true"></i>&nbsp;<#= Html.Escape(Field.ToString()) #>&nbsp;<button class="btn btn-success create-table-button" table-path="<#= Html.Escape(Field.ToString()) #>">Create</button><#
+  }
+#></td></tr>

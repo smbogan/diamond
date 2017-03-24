@@ -1,6 +1,5 @@
-﻿using Diamond.Storage;
-using Diamond.Storage.Formulas;
-using Diamond.Storage.Views;
+﻿using Diamond.Formulas;
+using Diamond.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +24,11 @@ namespace Diamond
         {
             get
             {
+                foreach(var d in Descriptor.GetDependencies())
+                {
+                    yield return d;
+                }
+
                 if(Descriptor.ProvidesEntry)
                 {
                     foreach(var x in FormulaVariableExtractor.GetVariables(Descriptor.GetEntry().Content))
@@ -61,6 +65,23 @@ namespace Diamond
             Descriptor = descriptor;
             Entry = entry;
             Variables = variables;
+        }
+
+        public Value GetValue()
+        {
+            if (!Descriptor.ProvidesEntry
+                && Entry != null
+                && Entry.Value.DataType != CellDataType.Formula)
+            {
+                if (Entry.Value.DataType == CellDataType.Empty)
+                    return new Value("");
+
+                return Entry.Value.ToValue();
+            }
+
+            var value = Variables[VariableName];
+
+            return value;
         }
 
         public override string ToString()

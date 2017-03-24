@@ -12,7 +12,7 @@ namespace Diamond.Templates.Views
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using Diamond.Storage.Views;
+    using Diamond.Views;
     using System;
     
     /// <summary>

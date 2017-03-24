@@ -1,6 +1,5 @@
-﻿using Diamond.Storage;
-using Diamond.Storage.Formulas;
-using Diamond.Storage.Views;
+﻿using Diamond.Formulas;
+using Diamond.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;

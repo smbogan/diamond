@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.props')" />
   <Import Project="..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -61,6 +62,18 @@
     <StartupObject>Diamond.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.16.3.0\lib\net45\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibGit2Sharp, Version=0.23.1.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibGit2Sharp.0.23.1\lib\net40\LibGit2Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sprache, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.2.1.0\lib\net40\Sprache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -74,6 +87,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache.cs" />
+    <Compile Include="Cell.cs" />
+    <Compile Include="CellDataType.cs" />
+    <Compile Include="CompilerWithoutVariablesFactoryCache.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="DiamondForm.cs">
       <SubType>Form</SubType>
@@ -81,13 +98,25 @@
     <Compile Include="DiamondForm.Designer.cs">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formula.cs" />
+    <Compile Include="Formulas\CompileError.cs" />
+    <Compile Include="Formulas\FormulaCompiler.cs" />
+    <Compile Include="Formulas\FormulaCompilerWithoutVariables.cs" />
+    <Compile Include="Formulas\FormulaVariableExtractor.cs" />
+    <Compile Include="Formulas\MissingVariables.cs" />
+    <Compile Include="Formulas\Value.cs" />
     <Compile Include="Html.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="ResourceIdentifier.cs" />
+    <Compile Include="ResourceType.cs" />
+    <Compile Include="Table.cs" />
     <Compile Include="TableFormulaMethodSource.cs" />
     <Compile Include="MimeTypes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceHandler.cs" />
     <Compile Include="SchemeHandlerFactory.cs" />
+    <Compile Include="TableMethodSource.cs" />
     <Compile Include="TemplatedView.cs" />
     <Compile Include="Templates\Tables\CellTemplate.cs">
       <AutoGen>True</AutoGen>
@@ -138,6 +167,18 @@
     </Compile>
     <Compile Include="Templates\Views\NumberTemplate.Data.cs" />
     <Compile Include="CompilerFactoryCache.cs" />
+    <Compile Include="Templates\Views\TableLinkTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableLinkTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\TableLinkTemplate.Data.cs" />
+    <Compile Include="Templates\Views\ViewLinkTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewLinkTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Views\ViewLinkTemplate.Data.cs" />
     <Compile Include="Templates\Views\ViewTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,6 +189,22 @@
     <Compile Include="ViewField.cs" />
     <Compile Include="ViewGraph.cs" />
     <Compile Include="ViewMethodSource.cs" />
+    <Compile Include="Views\IViewField.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\ViewCurrency.cs" />
+    <Compile Include="Views\ViewDescriptor.cs" />
+    <Compile Include="Views\ViewDescriptorEntry.cs" />
+    <Compile Include="Views\ViewDescriptorMethodSource.cs" />
+    <Compile Include="Views\ViewEntry.cs" />
+    <Compile Include="Views\ViewHeading.cs" />
+    <Compile Include="Views\ViewInputOptions.cs" />
+    <Compile Include="Views\ViewInputText.cs" />
+    <Compile Include="Views\ViewLink.cs" />
+    <Compile Include="Views\ViewNumber.cs" />
+    <Compile Include="Views\ViewTableLink.cs" />
+    <Compile Include="Views\ViewText.cs" />
+    <Compile Include="Views\ViewTypes.cs" />
+    <Compile Include="Views\ViewViewLink.cs" />
     <EmbeddedResource Include="DiamondForm.resx">
       <DependentUpon>DiamondForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,12 +254,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Diamond.Storage\Diamond.Storage.csproj">
-      <Project>{b0e674fd-b179-4290-8d34-1f9d074b281a}</Project>
-      <Name>Diamond.Storage</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="static\images\" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +281,14 @@
     <Content Include="Templates\Views\NumberTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NumberTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\TableLinkTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TableLinkTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\ViewLinkTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewLinkTemplate.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\Views\ViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
@@ -280,6 +339,7 @@
     <Error Condition="!Exists('..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.props'))" />
     <Error Condition="!Exists('..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.55.0.0\build\CefSharp.WinForms.targets'))" />
+    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props'))" />
   </Target>
   <Import Project="..\packages\cef.redist.x86.3.2883.1552\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2883.1552\build\cef.redist.x86.targets')" />
   <Import Project="..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.55.0.0\build\CefSharp.Common.targets')" />

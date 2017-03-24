@@ -11,9 +11,12 @@ namespace Diamond.Templates.Views
 
         ViewField Field { get; set; }
 
-        public FieldTemplate(ViewField field)
+        Controller Controller { get; set; }
+
+        public FieldTemplate(Controller controller, ViewField field)
         {
             Field = field;
+            Controller = controller;
         }
     }
 }

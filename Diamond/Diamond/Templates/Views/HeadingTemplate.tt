@@ -3,6 +3,6 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="Diamond.Storage.Views" #>
+<#@ import namespace="Diamond.Views" #>
 
 <tr class="info" variable-name="<#= Field.VariableName #>"><td colspan="2"><b><#= Field.ToString() #></b></td></tr>

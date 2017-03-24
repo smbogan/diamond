@@ -1,0 +1,23 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<tr variable-name="<#= Field.VariableName #>"><td><b><#= Html.Escape(Field.Name) #></b></td><td field-name="<#= Html.Escape(Field.Name) #>" class="view-link-field"><# 
+  if(MissingVariables())
+  {
+    #><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;<#= Html.Escape(MissingVariablesString()) #><#
+  }
+  else
+  {
+    if(PathExists())
+    {
+      #><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;<#= Html.Escape(Field.ToString()) #><button class="btn btn-info edit-view-button" view-path="<#= Html.Escape(Field.ToString()) #>">Edit</button><#
+    }
+    else
+    {
+      #><i class="fa fa-list-alt" style="color: red;" aria-hidden="true"></i>&nbsp;<#= Html.Escape(Field.ToString()) #>&nbsp;<button class="btn btn-success create-view-button" view-path="<#= Html.Escape(Field.ToString()) #>">Create</button><#
+    }
+  }
+#></td></tr>
