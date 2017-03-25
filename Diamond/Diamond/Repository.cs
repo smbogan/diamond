@@ -40,22 +40,22 @@ namespace Diamond
 
         public bool Exists(ResourceIdentifier identifier)
         {
-            return File.Exists(Path.Combine(location, identifier.Identifier));
+            return File.Exists(Path.Combine(location, "." + identifier.Identifier));
         }
 
         public Stream ReadFile(string url)
         {
-            return File.OpenRead(Path.Combine(location, url));
+            return File.OpenRead(Path.Combine(location, "." + url));
         }
 
         public Stream ReadFile(ResourceIdentifier identifier)
         {
-            return File.OpenRead(Path.Combine(location, identifier.Identifier));
+            return File.OpenRead(Path.Combine(location, "." + identifier.Identifier));
         }
 
         public void WriteFile(string url, Stream stream)
         {
-            var dest = Path.Combine(location, url);
+            var dest = Path.Combine(location, "." + url);
 
             Directory.CreateDirectory(Path.GetDirectoryName(dest));
 
@@ -69,7 +69,7 @@ namespace Diamond
 
         public void WriteFile(ResourceIdentifier identifier, Stream stream)
         {
-            var dest = Path.Combine(location, identifier.Identifier);
+            var dest = Path.Combine(location, "." + identifier.Identifier);
 
             Directory.CreateDirectory(Path.GetDirectoryName(dest));
 

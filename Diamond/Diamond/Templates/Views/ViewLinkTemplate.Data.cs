@@ -13,10 +13,13 @@ namespace Diamond.Templates.Views
 
         Controller Controller { get; set; }
 
-        public ViewLinkTemplate(Controller controller, ViewField field)
+        string ViewPath { get; set; }
+
+        public ViewLinkTemplate(Controller controller, string viewPath, ViewField field)
         {
             Controller = controller;
             Field = field;
+            ViewPath = viewPath;
         }
 
         public bool MissingVariables()
@@ -36,7 +39,7 @@ namespace Diamond.Templates.Views
 
         public bool PathExists()
         {
-            return Controller.Cache.Exists(new ResourceIdentifier(Field.ToString()));
+            return Controller.Cache.Exists(new ResourceIdentifier(ViewPath, Field.ToString()));
         }
     }
 }

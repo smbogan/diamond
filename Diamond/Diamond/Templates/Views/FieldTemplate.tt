@@ -31,7 +31,7 @@
 	   #><#= (new TableLinkTemplate(Controller, Field)).TransformText() #><#
 	   break;
 	 case ViewTypes.ViewLink:
-	   #><#= (new ViewLinkTemplate(Controller, Field)).TransformText() #><#
+	   #><#= (new ViewLinkTemplate(Controller, Path, Field)).TransformText() #><#
 	   break;
      default:
        break;

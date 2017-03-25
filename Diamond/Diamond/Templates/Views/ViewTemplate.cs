@@ -67,7 +67,7 @@ namespace Diamond.Templates.Views
             #line hidden
             
             #line 33 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new FieldTemplate(Controller, field)).TransformText()));
+            this.Write(this.ToStringHelper.ToStringWithCulture((new FieldTemplate(Controller, BasePath, field)).TransformText()));
             
             #line default
             #line hidden

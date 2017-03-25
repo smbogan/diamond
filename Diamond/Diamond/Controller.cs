@@ -75,7 +75,7 @@ namespace Diamond
 
             var field = templatedView.Where(f => f.VariableName == variableName).FirstOrDefault();
 
-            return new FieldTemplate(this, field).TransformText();
+            return new FieldTemplate(this, path, field).TransformText();
 
             //return Html.Escape(field.ToString());
         }

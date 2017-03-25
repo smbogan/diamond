@@ -30,7 +30,7 @@
 		  <tbody>
             <# foreach(var field in TemplatedView)
 	           {
-	     	      #><#= (new FieldTemplate(Controller, field)).TransformText() #><#
+	     	      #><#= (new FieldTemplate(Controller, BasePath, field)).TransformText() #><#
 	      	   } #>
 		  </tbody>
 		</table>

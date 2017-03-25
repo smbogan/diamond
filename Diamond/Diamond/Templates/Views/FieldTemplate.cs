@@ -136,7 +136,7 @@ namespace Diamond.Templates.Views
             #line hidden
             
             #line 34 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new ViewLinkTemplate(Controller, Field)).TransformText()));
+            this.Write(this.ToStringHelper.ToStringWithCulture((new ViewLinkTemplate(Controller, Path, Field)).TransformText()));
             
             #line default
             #line hidden

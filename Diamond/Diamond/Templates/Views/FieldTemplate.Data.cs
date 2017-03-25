@@ -13,10 +13,13 @@ namespace Diamond.Templates.Views
 
         Controller Controller { get; set; }
 
-        public FieldTemplate(Controller controller, ViewField field)
+        string Path { get; set; }
+
+        public FieldTemplate(Controller controller, string viewPath, ViewField field)
         {
             Field = field;
             Controller = controller;
+            Path = viewPath;
         }
     }
 }

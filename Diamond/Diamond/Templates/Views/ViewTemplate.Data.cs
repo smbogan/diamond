@@ -13,6 +13,8 @@ namespace Diamond.Templates.Views
 
         string Path { get; set; }
 
+        string BasePath { get; set; }
+
         Controller Controller { get; set; }
 
         public ViewTemplate(Controller controller, TemplatedView templatedView, string path)
@@ -20,6 +22,8 @@ namespace Diamond.Templates.Views
             Controller = controller;
             Path = path;
             TemplatedView = templatedView;
+
+            BasePath = System.IO.Path.GetDirectoryName(path).Replace('\\', '/');
         }
     }
 }

@@ -35,6 +35,23 @@ namespace Diamond
 
         public ResourceType ResourceType { get; private set; }
 
+        public ResourceIdentifier(string basePath, string identifier)
+            : this(CombinePath(basePath, identifier))
+        {
+
+        }
+
+        private static string CombinePath(string basePath, string identifier)
+        {
+            if (identifier[0] == '/')
+                return identifier;
+
+            if (basePath == "")
+                return '/' + identifier;
+
+            return System.IO.Path.Combine(basePath, identifier).Replace('\\', '/');
+        }
+
         public ResourceIdentifier(string identifier)
         {
             ResourceType? resourceType = null;
@@ -74,12 +91,12 @@ namespace Diamond
                 }
             }
 
-            Identifier = identifier;
+            Identifier = (identifier.FirstOrDefault() == '/' ? "" : "/") + identifier;
         }
 
         public bool Exists(string repositoryLocation)
         {
-            return File.Exists(Path.Combine(repositoryLocation, Identifier));
+            return File.Exists(Path.Combine(repositoryLocation, "." + Identifier));
         }
 
         public override bool Equals(object obj)
