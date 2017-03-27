@@ -78,7 +78,7 @@ namespace Diamond
                 stream.CopyTo(fs);
             }
 
-            LibGit2Sharp.Commands.Stage(repository, identifier.Identifier);
+            LibGit2Sharp.Commands.Stage(repository, "." + identifier.Identifier);
         }
 
         public void Commit(string message = "none")
