@@ -19,9 +19,11 @@ namespace Diamond
 
         Dictionary<ResourceIdentifier, TemplatedView> Templates { get; set; } = new Dictionary<ResourceIdentifier, TemplatedView>();
 
+        string repositoryPath = "C:\\DiamondData";
+
         public Controller()
         {
-            Repository repo = new Repository("C:\\DiamondData", "Shaun Bogan", "smbogan@gmail.com");
+            Repository repo = new Repository(repositoryPath, "Shaun Bogan", "smbogan@gmail.com");
             Cache = new Cache(repo);
         }
 
@@ -76,8 +78,6 @@ namespace Diamond
             var field = templatedView.Where(f => f.VariableName == variableName).FirstOrDefault();
 
             return new FieldTemplate(this, System.IO.Path.GetDirectoryName(path), field).TransformText();
-
-            //return Html.Escape(field.ToString());
         }
 
         public void CreateTable(string viewPath, string variableName, string path)
@@ -108,6 +108,15 @@ namespace Diamond
             var newView = new View(descriptor);
 
             Cache.SaveView(new ResourceIdentifier(path), newView);
+        }
+
+        public Stream BrowseDirectory(string path)
+        {
+            string result;
+
+            result = new Templates.Browser.DirectoryBrowser(repositoryPath, path).TransformText();
+
+            return new MemoryStream(Encoding.UTF8.GetBytes(result));
         }
 
         public void UpdateTableValue(string path, int row, int col, string value)

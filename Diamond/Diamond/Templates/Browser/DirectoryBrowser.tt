@@ -1,0 +1,66 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title></title>
+
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/jcontext/jquery.contextMenu.css" rel="stylesheet">
+	<link href="/css/main.css" rel="stylesheet">
+
+  </head>
+  <body>
+	<div class="container">
+	  <div class="content">
+	    <table class="table table-bordered table-striped view-table">
+		  <thead>
+		    <tr><th style="width: 25px;"><th>Path</th></tr>
+		  </thead>
+		  <tbody>
+		    <# if(!IsRoot())
+			   { #>
+			   <tr><td><i class="fa fa-level-up" aria-hidden="true"></i></td><td><a href="../">[...]</a></td></tr>
+			   <#
+			   }
+
+			   foreach(var directory in Directories())
+	           {
+	     	      #><tr><td><i class="fa fa-folder-o" aria-hidden="true"></i></td><td><a href="./<#= directory #>/"><#= Html.Escape(directory) #></a></td></tr><#
+	      	   } 
+			   
+			   foreach(var resource in Files())
+			   {
+			      if(resource.ResourceType == ResourceType.View)
+				  {
+			         #><tr><td><i class="fa fa-list-alt" aria-hidden="true"></i></td><td><a href="<#= resource.Identifier #>"><#= Html.Escape(System.IO.Path.GetFileName(resource.Identifier)) #></a></td></tr><#
+			      }
+				  else if(resource.ResourceType == ResourceType.Table)
+				  {
+				     #><tr><td><i class="fa fa-table" aria-hidden="true"></i></td><td><a href="<#= resource.Identifier #>"><#= Html.Escape(System.IO.Path.GetFileName(resource.Identifier)) #></a></td></tr><#
+				  }
+			   } #>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/js/jquery-3.1.1.js"></script>
+	<script src="/js/jquery.caret-1.5.2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/jcontext/jquery.ui.position.min.js"></script>
+	<script src="/jcontext/jquery.contextMenu.min.js"></script>
+
+  </body>
+</html>

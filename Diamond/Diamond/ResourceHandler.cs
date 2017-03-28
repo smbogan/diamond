@@ -86,6 +86,12 @@ namespace Diamond
                 if(string.IsNullOrEmpty(Path.GetExtension(file)))
                 {
                     //Directory browser
+                    stream = controller.BrowseDirectory(file);
+
+                    mimeType = MimeTypes.GetMimeType(".html");
+
+                    responseLength = stream.Length;
+                    Stream = stream;
                 }
                 else if(ResourceIdentifier.IsResourceUrl(file))
                 {

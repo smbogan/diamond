@@ -118,6 +118,12 @@
     <Compile Include="SchemeHandlerFactory.cs" />
     <Compile Include="TableMethodSource.cs" />
     <Compile Include="TemplatedView.cs" />
+    <Compile Include="Templates\Browser\DirectoryBrowser.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DirectoryBrowser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Browser\DirectoryBrowser.Data.cs" />
     <Compile Include="Templates\Tables\CellTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +264,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="static\js\view.js" />
+    <Content Include="Templates\Browser\DirectoryBrowser.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DirectoryBrowser.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\Views\CurrencyTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CurrencyTemplate.cs</LastGenOutput>

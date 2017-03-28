@@ -42,11 +42,18 @@ namespace Diamond
                 }
             };
 
-            Controls.Add(Browser);
+            browserPanel.Controls.Add(Browser);
 
             Browser.RegisterJsObject("controller", Controller);
 
+            Browser.AddressChanged += Browser_AddressChanged;
+
             Browser.Dock = DockStyle.Fill;
+        }
+
+        private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            address.Text = e.Address;
         }
 
         private void button1_Click(object sender, EventArgs e)
