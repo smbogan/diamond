@@ -21,6 +21,7 @@
   </head>
   <body>
 	<div class="container">
+	  <#= new PathBreadcrumb(Path).TransformText() #>
 	  <div class="content">
         <table class="table table-bordered table-striped" table-path="<#= Path #>" table-rows="<#= Table.Rows #>" table-cols="<#= Table.Columns #>">
 		  <thead>

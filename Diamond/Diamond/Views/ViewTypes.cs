@@ -16,6 +16,7 @@ namespace Diamond.Views
         Heading,
         InputText,
         TableLink,
-        ViewLink
+        ViewLink,
+        Save
     }
 }

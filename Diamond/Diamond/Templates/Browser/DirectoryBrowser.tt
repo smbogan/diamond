@@ -21,6 +21,7 @@
   </head>
   <body>
 	<div class="container">
+	  <#= new PathBreadcrumb(Directory).TransformText() #>
 	  <div class="content">
 	    <table class="table table-bordered table-striped view-table">
 		  <thead>

@@ -58,5 +58,10 @@ namespace Diamond.Views
         {
             return new ViewNumber(formula.StringValue);
         }
+
+        public IViewField Save()
+        {
+            return new ViewSave();
+        }
     }
 }

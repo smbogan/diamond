@@ -18,7 +18,7 @@ namespace Diamond.Templates.Tables
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class TableTemplate : TableTemplateBase
     {
@@ -46,31 +46,38 @@ namespace Diamond.Templates.Tables
   </head>
   <body>
 	<div class=""container"">
-	  <div class=""content"">
-        <table class=""table table-bordered table-striped"" table-path=""");
+	  ");
             
-            #line 25 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 24 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new PathBreadcrumb(Path).TransformText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t  <div class=\"content\">\r\n        <table class=\"table table-bordered table-stri" +
+                    "ped\" table-path=\"");
+            
+            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Path));
             
             #line default
             #line hidden
             this.Write("\" table-rows=\"");
             
-            #line 25 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Table.Rows));
             
             #line default
             #line hidden
             this.Write("\" table-cols=\"");
             
-            #line 25 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Table.Columns));
             
             #line default
             #line hidden
             this.Write("\">\r\n\t\t  <thead>\r\n            <tr><th style=\"width: 25px;\"></th>\r\n              ");
             
-            #line 28 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 29 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
  foreach(var h in Table.Headings)
         	     {
                    
@@ -79,14 +86,14 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("<th>");
             
-            #line 30 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(h));
             
             #line default
             #line hidden
             this.Write("</th>");
             
-            #line 30 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
         	     } 
             
@@ -94,7 +101,7 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("            </tr>\r\n\t\t  </thead>\r\n\t\t  <tbody>\r\n\t\t    ");
             
-            #line 35 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 36 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 		    for(int r = 0; r < Table.Rows; r++)
 		    {
@@ -104,14 +111,14 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("<tr><td row=\"");
             
-            #line 38 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 39 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(r));
             
             #line default
             #line hidden
             this.Write("\"><i class=\"fa fa-square-o row-handle\" aria-hidden=\"true\"></i></td>\r\n\t\t\t  ");
             
-            #line 39 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 40 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 			    for(int c = 0; c < Table.Columns; c++)
 			    {
@@ -120,13 +127,13 @@ namespace Diamond.Templates.Tables
             #line default
             #line hidden
             
-            #line 42 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 43 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(new CellTemplate(Controller, Table, Table[r, c], r, c).TransformText()));
             
             #line default
             #line hidden
             
-            #line 42 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 43 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 			    }
 			  
@@ -135,7 +142,7 @@ namespace Diamond.Templates.Tables
             #line hidden
             this.Write("\t\t\t  </tr>");
             
-            #line 45 "C:\Projects\diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
+            #line 46 "C:\Projects\Diamond\Diamond\Diamond\Templates\Tables\TableTemplate.tt"
 
 		    }
 		    

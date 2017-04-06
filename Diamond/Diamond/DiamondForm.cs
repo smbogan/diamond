@@ -53,7 +53,7 @@ namespace Diamond
 
         private void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
         {
-            address.Text = e.Address;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

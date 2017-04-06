@@ -124,6 +124,12 @@
       <DependentUpon>DirectoryBrowser.tt</DependentUpon>
     </Compile>
     <Compile Include="Templates\Browser\DirectoryBrowser.Data.cs" />
+    <Compile Include="Templates\PathBreadcrumb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PathBreadcrumb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\PathBreadcrumb.Data.cs" />
     <Compile Include="Templates\Tables\CellTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +179,11 @@
     </Compile>
     <Compile Include="Templates\Views\NumberTemplate.Data.cs" />
     <Compile Include="CompilerFactoryCache.cs" />
+    <Compile Include="Templates\Views\SaveTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaveTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Views\TableLinkTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +218,7 @@
     <Compile Include="Views\ViewInputText.cs" />
     <Compile Include="Views\ViewLink.cs" />
     <Compile Include="Views\ViewNumber.cs" />
+    <Compile Include="Views\ViewSave.cs" />
     <Compile Include="Views\ViewTableLink.cs" />
     <Compile Include="Views\ViewText.cs" />
     <Compile Include="Views\ViewTypes.cs" />
@@ -268,6 +280,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DirectoryBrowser.cs</LastGenOutput>
     </Content>
+    <Content Include="Templates\PathBreadcrumb.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PathBreadcrumb.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\Views\CurrencyTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>CurrencyTemplate.cs</LastGenOutput>
@@ -291,6 +307,10 @@
     <Content Include="Templates\Views\NumberTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>NumberTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\Views\SaveTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SaveTemplate.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\Views\TableLinkTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

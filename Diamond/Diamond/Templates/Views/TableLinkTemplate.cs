@@ -66,7 +66,7 @@ namespace Diamond.Templates.Views
             
             #line default
             #line hidden
-            this.Write("<button class=\"btn btn-info edit-table-button\" table-path=\"");
+            this.Write("&nbsp;<button class=\"btn btn-info edit-table-button\" table-path=\"");
             
             #line 10 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\TableLinkTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(Field.ToString())));

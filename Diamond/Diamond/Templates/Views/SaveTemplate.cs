@@ -12,16 +12,15 @@ namespace Diamond.Templates.Views
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using Diamond.Views;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\SaveTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class FieldTemplate : FieldTemplateBase
+    public partial class SaveTemplate : SaveTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,143 +28,8 @@ namespace Diamond.Templates.Views
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n");
-            
-            #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-  switch(Field.Descriptor.ViewType)
-  {
-     case ViewTypes.Link:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new LinkTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-       break;
-     case ViewTypes.Options:
-       break;
-     case ViewTypes.Currency:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new CurrencyTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-       break;
-     case ViewTypes.Number:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new NumberTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-       break;
-     case ViewTypes.Text:
-       break;
-	 case ViewTypes.InputText:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new InputTextTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-     case ViewTypes.Heading:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new HeadingTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-       break;
-	 case ViewTypes.TableLink:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new TableLinkTemplate(Controller, Path, Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-	 case ViewTypes.ViewLink:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new ViewLinkTemplate(Controller, Path, Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-	 case ViewTypes.Save:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new SaveTemplate()).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-     default:
-       break;
-  }
-
-            
-            #line default
-            #line hidden
+            this.Write("\r\n<tr><td></td><td><button class=\"save-view-button\"><i class=\"fa fa-floppy-o\" ari" +
+                    "a-hidden=\"true\">&nbsp;Save</i></button></td></tr>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -177,7 +41,7 @@ namespace Diamond.Templates.Views
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class FieldTemplateBase
+    public class SaveTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

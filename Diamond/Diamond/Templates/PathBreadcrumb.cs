@@ -7,21 +7,20 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace Diamond.Templates.Views
+namespace Diamond.Templates
 {
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using Diamond.Views;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public partial class FieldTemplate : FieldTemplateBase
+    public partial class PathBreadcrumb : PathBreadcrumbBase
     {
 #line hidden
         /// <summary>
@@ -29,143 +28,76 @@ namespace Diamond.Templates.Views
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n");
+            this.Write("\r\n<ol class=\"breadcrumb\">\r\n");
             
-            #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            #line 8 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
+ 
+  StringBuilder sb = new StringBuilder();
 
-  switch(Field.Descriptor.ViewType)
+  sb.Append('/');
+
+  
+            
+            #line default
+            #line hidden
+            this.Write("<li><a href=\"/\"><i class=\"fa fa-home\" aria-hidden=\"true\"></i></a></li>");
+            
+            #line 13 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
+
+
+  for(int i = 0; i < UrlParts.Length - 1; i++)
   {
-     case ViewTypes.Link:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new LinkTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 12 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+    sb.Append(UrlParts[i]);
+	sb.Append('/');
 
-       break;
-     case ViewTypes.Options:
-       break;
-     case ViewTypes.Currency:
-	   
+	
             
             #line default
             #line hidden
+            this.Write("<li><a href=\"");
             
-            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new CurrencyTemplate(Field)).TransformText()));
+            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sb.ToString()));
             
             #line default
             #line hidden
+            this.Write("\">");
             
-            #line 17 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(UrlParts[i])));
+            
+            #line default
+            #line hidden
+            this.Write("</a></li>");
+            
+            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
 
-       break;
-     case ViewTypes.Number:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new NumberTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 20 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+  }
 
-       break;
-     case ViewTypes.Text:
-       break;
-	 case ViewTypes.InputText:
-	   
+  if(UrlParts.Length > 0)
+  {
+    sb.Append(UrlParts[UrlParts.Length - 1]);
+    
             
             #line default
             #line hidden
+            this.Write("<li>");
             
-            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new InputTextTemplate(Field)).TransformText()));
+            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(UrlParts[UrlParts.Length - 1])));
             
             #line default
             #line hidden
+            this.Write("</li>");
             
-            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
+            #line 26 "C:\Projects\Diamond\Diamond\Diamond\Templates\PathBreadcrumb.tt"
 
-	   break;
-     case ViewTypes.Heading:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new HeadingTemplate(Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 28 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-       break;
-	 case ViewTypes.TableLink:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new TableLinkTemplate(Controller, Path, Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 31 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-	 case ViewTypes.ViewLink:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new ViewLinkTemplate(Controller, Path, Field)).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-	 case ViewTypes.Save:
-	   
-            
-            #line default
-            #line hidden
-            
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture((new SaveTemplate()).TransformText()));
-            
-            #line default
-            #line hidden
-            
-            #line 37 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\FieldTemplate.tt"
-
-	   break;
-     default:
-       break;
   }
 
             
             #line default
             #line hidden
+            this.Write("</ol>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -177,7 +109,7 @@ namespace Diamond.Templates.Views
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
-    public class FieldTemplateBase
+    public class PathBreadcrumbBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

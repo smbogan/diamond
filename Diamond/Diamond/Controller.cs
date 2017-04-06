@@ -92,7 +92,7 @@ namespace Diamond
 
             var newTable = new Table(headings);
 
-            Cache.SaveTable(new ResourceIdentifier(path), newTable);
+            Cache.SaveTable(new ResourceIdentifier(Path.GetDirectoryName(viewPath), path), newTable);
         }
 
         public void CreateView(string viewPath, string variableName, string path)

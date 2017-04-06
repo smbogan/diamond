@@ -18,7 +18,7 @@ namespace Diamond.Templates.Browser
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class DirectoryBrowser : DirectoryBrowserBase
     {
@@ -46,15 +46,18 @@ namespace Diamond.Templates.Browser
   </head>
   <body>
 	<div class=""container"">
-	  <div class=""content"">
-	    <table class=""table table-bordered table-striped view-table"">
-		  <thead>
-		    <tr><th style=""width: 25px;""><th>Path</th></tr>
-		  </thead>
-		  <tbody>
-		    ");
+	  ");
             
-            #line 30 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 24 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new PathBreadcrumb(Directory).TransformText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t  <div class=\"content\">\r\n\t    <table class=\"table table-bordered table-striped" +
+                    " view-table\">\r\n\t\t  <thead>\r\n\t\t    <tr><th style=\"width: 25px;\"><th>Path</th></tr" +
+                    ">\r\n\t\t  </thead>\r\n\t\t  <tbody>\r\n\t\t    ");
+            
+            #line 31 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
  if(!IsRoot())
 			   { 
             
@@ -63,7 +66,7 @@ namespace Diamond.Templates.Browser
             this.Write("\t\t\t   <tr><td><i class=\"fa fa-level-up\" aria-hidden=\"true\"></i></td><td><a href=\"" +
                     "../\">[...]</a></td></tr>\r\n\t\t\t   ");
             
-            #line 33 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 34 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
 
 			   }
 
@@ -75,21 +78,21 @@ namespace Diamond.Templates.Browser
             #line hidden
             this.Write("<tr><td><i class=\"fa fa-folder-o\" aria-hidden=\"true\"></i></td><td><a href=\"./");
             
-            #line 38 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 39 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(directory));
             
             #line default
             #line hidden
             this.Write("/\">");
             
-            #line 38 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 39 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(directory)));
             
             #line default
             #line hidden
             this.Write("</a></td></tr>");
             
-            #line 38 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 39 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
 
 	      	   } 
 			   
@@ -103,21 +106,21 @@ namespace Diamond.Templates.Browser
             #line hidden
             this.Write("<tr><td><i class=\"fa fa-list-alt\" aria-hidden=\"true\"></i></td><td><a href=\"");
             
-            #line 45 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 46 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(resource.Identifier));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 45 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 46 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(System.IO.Path.GetFileName(resource.Identifier))));
             
             #line default
             #line hidden
             this.Write("</a></td></tr>");
             
-            #line 45 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 46 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
 
 			      }
 				  else if(resource.ResourceType == ResourceType.Table)
@@ -128,21 +131,21 @@ namespace Diamond.Templates.Browser
             #line hidden
             this.Write("<tr><td><i class=\"fa fa-table\" aria-hidden=\"true\"></i></td><td><a href=\"");
             
-            #line 49 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 50 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(resource.Identifier));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 49 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 50 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(System.IO.Path.GetFileName(resource.Identifier))));
             
             #line default
             #line hidden
             this.Write("</a></td></tr>");
             
-            #line 49 "C:\Projects\Diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
+            #line 50 "C:\Projects\diamond\Diamond\Diamond\Templates\Browser\DirectoryBrowser.tt"
 
 				  }
 			   } 

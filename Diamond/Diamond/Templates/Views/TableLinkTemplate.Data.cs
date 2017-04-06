@@ -13,15 +13,18 @@ namespace Diamond.Templates.Views
 
         Controller Controller { get; set; }
 
-        public TableLinkTemplate(Controller controller, ViewField viewField)
+        string Path { get; set; }
+
+        public TableLinkTemplate(Controller controller, string path, ViewField viewField)
         {
             Controller = controller;
             Field = viewField;
+            Path = path;
         }
 
         public bool PathExists()
         {
-            return Controller.Cache.Exists(new ResourceIdentifier(Field.ToString()));
+            return Controller.Cache.Exists(new ResourceIdentifier(Path, Field.ToString()));
         }
     }
 }

@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.address = new System.Windows.Forms.TextBox();
             this.browserPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -56,21 +55,12 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // address
-            // 
-            this.address.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.address.Dock = System.Windows.Forms.DockStyle.Top;
-            this.address.Location = new System.Drawing.Point(0, 0);
-            this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(714, 13);
-            this.address.TabIndex = 2;
-            // 
             // browserPanel
             // 
             this.browserPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserPanel.Location = new System.Drawing.Point(0, 13);
+            this.browserPanel.Location = new System.Drawing.Point(0, 0);
             this.browserPanel.Name = "browserPanel";
-            this.browserPanel.Size = new System.Drawing.Size(714, 372);
+            this.browserPanel.Size = new System.Drawing.Size(714, 385);
             this.browserPanel.TabIndex = 3;
             // 
             // DiamondForm
@@ -79,7 +69,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 385);
             this.Controls.Add(this.browserPanel);
-            this.Controls.Add(this.address);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "DiamondForm";
@@ -87,7 +76,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DiamondForm_FormClosed);
             this.Load += new System.EventHandler(this.DiamondForm_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -95,7 +83,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox address;
         private System.Windows.Forms.Panel browserPanel;
     }
 }

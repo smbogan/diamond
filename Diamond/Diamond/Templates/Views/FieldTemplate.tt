@@ -28,10 +28,13 @@
 	   #><#= (new HeadingTemplate(Field)).TransformText() #><#
        break;
 	 case ViewTypes.TableLink:
-	   #><#= (new TableLinkTemplate(Controller, Field)).TransformText() #><#
+	   #><#= (new TableLinkTemplate(Controller, Path, Field)).TransformText() #><#
 	   break;
 	 case ViewTypes.ViewLink:
 	   #><#= (new ViewLinkTemplate(Controller, Path, Field)).TransformText() #><#
+	   break;
+	 case ViewTypes.Save:
+	   #><#= (new SaveTemplate()).TransformText() #><#
 	   break;
      default:
        break;

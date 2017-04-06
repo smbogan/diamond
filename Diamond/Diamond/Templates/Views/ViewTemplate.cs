@@ -19,7 +19,7 @@ namespace Diamond.Templates.Views
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+    #line 1 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     public partial class ViewTemplate : ViewTemplateBase
     {
@@ -47,10 +47,17 @@ namespace Diamond.Templates.Views
   </head>
   <body>
 	<div class=""container"">
-	  <div class=""content"">
-	    <table class=""table table-bordered table-striped view-table"" view-path=""");
+	  ");
             
-            #line 26 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 25 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new PathBreadcrumb(Path).TransformText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t  <div class=\"content\">\r\n\t    <table class=\"table table-bordered table-striped" +
+                    " view-table\" view-path=\"");
+            
+            #line 27 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Html.Escape(Path)));
             
             #line default
@@ -58,7 +65,7 @@ namespace Diamond.Templates.Views
             this.Write("\">\r\n\t\t  <!--<thead>\r\n\t\t    <tr><th>Key</th><th>Value</th></tr>\r\n\t\t  </thead>-->\r\n" +
                     "\t\t  <tbody>\r\n            ");
             
-            #line 31 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 32 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
  foreach(var field in TemplatedView)
 	           {
 	     	      
@@ -66,13 +73,13 @@ namespace Diamond.Templates.Views
             #line default
             #line hidden
             
-            #line 33 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((new FieldTemplate(Controller, BasePath, field)).TransformText()));
             
             #line default
             #line hidden
             
-            #line 33 "C:\Projects\diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
+            #line 34 "C:\Projects\Diamond\Diamond\Diamond\Templates\Views\ViewTemplate.tt"
 
 	      	   } 
             
@@ -80,7 +87,6 @@ namespace Diamond.Templates.Views
             #line hidden
             this.Write(@"		  </tbody>
 		</table>
-		<div class=""view-save-container""><button class=""save-view-button""><i class=""fa fa-floppy-o"" aria-hidden=""true"">&nbsp;Save</i></button></div>
 	  </div>
 	</div>
 
